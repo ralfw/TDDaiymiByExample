@@ -24,6 +24,13 @@ namespace ToDictionary
             Assert.That(result, Is.EqualTo(new Dictionary<string,string>{{"a", "1"},{"b", "2"}}));
         }
 
+        [Test]
+        public void Multi_char_name()
+        {
+            var name = "abc=1".Substring(0, 1);
+            Assert.AreEqual("abc", name);
+        }
+
 
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
