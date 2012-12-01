@@ -27,24 +27,23 @@ namespace ToDictionary
         [Test]
         public void Multi_char_name()
         {
-            var splitAssignment = "abc=1".Split('=');
-            var name = splitAssignment[0];
-            Assert.AreEqual("abc", name);
+            var kvp = Split_assignment("abc=1");
+            Assert.AreEqual("abc", kvp.Key);
         }
 
         [Test]
         public void Multi_char_value()
         {
-            var splitAssignment = "a=1234".Split('=');
-            var value = splitAssignment[1];
-            Assert.AreEqual("1234", value);
+            var kvp = Split_assignment("a=1234");
+            Assert.AreEqual("1234", kvp.Value);
         }
 
 
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
-            var name = assignment.Substring(0, 1);
-            var value = assignment.Substring(2, 1);
+            var splitAssignment = assignment.Split('=');
+            var name = splitAssignment[0];
+            var value = splitAssignment[1];
             return new KeyValuePair<string, string>(name,value);
         } 
 
