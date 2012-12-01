@@ -13,7 +13,7 @@ namespace ToDictionary
         public void Single_name_value_pair()
         {
             var kvp = Split_assignment("a=1");
-            var result = new Dictionary<string, string> {{kvp.Key, kvp.Value}};
+            var result = Aggregate_dictionary(new Dictionary<string, string>(), kvp.Key, kvp.Value);
             Assert.That(result, Is.EqualTo(new Dictionary<string,string>{{"a", "1"}}));
         }
 
@@ -23,10 +23,10 @@ namespace ToDictionary
             var nvpairs = "a=1;b=2".Split(';');
 
             var kvp = Split_assignment(nvpairs[0]);
-            var result = new Dictionary<string, string> {{kvp.Key, kvp.Value}};
+            var result = Aggregate_dictionary(new Dictionary<string, string>(), kvp.Key, kvp.Value);
 
             kvp = Split_assignment(nvpairs[1]);
-            result.Add(kvp.Key, kvp.Value);
+            result = Aggregate_dictionary(result, kvp.Key, kvp.Value);
 
             Assert.That(result, Is.EqualTo(new Dictionary<string,string>{{"a", "1"},{"b", "2"}}));
         }
@@ -38,5 +38,11 @@ namespace ToDictionary
             var value = assignment.Substring(2, 1);
             return new KeyValuePair<string, string>(name,value);
         } 
+
+        static Dictionary<string,string> Aggregate_dictionary(Dictionary<string,string> dict, string name, string value)
+        {
+            dict.Add(name, value);
+            return dict;
+        }
     }
 }
