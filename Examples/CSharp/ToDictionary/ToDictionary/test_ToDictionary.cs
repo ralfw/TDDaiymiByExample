@@ -38,6 +38,13 @@ namespace ToDictionary
             Assert.AreEqual("1234", kvp.Value);
         }
 
+        [Test]
+        public void Empty_value()
+        {
+            var kvp = Split_assignment("a=");
+            Assert.AreEqual("", kvp.Value);
+        }
+
 
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
