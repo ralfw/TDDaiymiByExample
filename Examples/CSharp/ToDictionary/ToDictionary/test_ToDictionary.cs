@@ -40,13 +40,9 @@ namespace ToDictionary
 
         static Dictionary<string,string> Build_dictionary_from_assignments(IEnumerable<string> assignments)
         {
-            var dict = new Dictionary<string, string>();
-            foreach(var assignment in assignments)
-            {
-                var kvp = Split_assignment(assignment);
-                dict = Aggregate_dictionary(dict, kvp.Key, kvp.Value);   
-            }
-            return dict;
+            return assignments.Select(Split_assignment)
+                              .Aggregate(new Dictionary<string, string>(), 
+                                         (current, kvp) => Aggregate_dictionary(current, kvp.Key, kvp.Value));
         } 
     }
 }
