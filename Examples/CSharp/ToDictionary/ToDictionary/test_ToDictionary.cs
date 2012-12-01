@@ -32,6 +32,13 @@ namespace ToDictionary
             Assert.AreEqual("abc", name);
         }
 
+        [Test]
+        public void Multi_char_value()
+        {
+            var value = "a=1234".Substring(2, 1);
+            Assert.AreEqual("1234", value);
+        }
+
 
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
