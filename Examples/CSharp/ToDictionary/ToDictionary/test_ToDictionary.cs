@@ -27,7 +27,8 @@ namespace ToDictionary
         [Test]
         public void Multi_char_name()
         {
-            var name = "abc=1".Substring(0, 1);
+            var splitAssignment = "abc=1".Split('=');
+            var name = splitAssignment[0];
             Assert.AreEqual("abc", name);
         }
 
