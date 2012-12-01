@@ -35,7 +35,8 @@ namespace ToDictionary
         [Test]
         public void Multi_char_value()
         {
-            var value = "a=1234".Substring(2, 1);
+            var splitAssignment = "a=1234".Split('=');
+            var value = splitAssignment[1];
             Assert.AreEqual("1234", value);
         }
 
