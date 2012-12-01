@@ -25,9 +25,10 @@ Aspects of the solution seem to be
 ## Test Cases
 Happy cases
 
-* "a=1" = {{"a", "1"}}
-* "a=1;b=2" = {{"a", "1"}, {"b", "2"}}
-* "abc=1234" = {{"abc", "1234"}}
+* "a=1" = {{"a", "1"}} // single name-value-pair
+* "a=1;b=2" = {{"a", "1"}, {"b", "2"}} // multiple name-value-pairs
+* "abc=1" = {{"abc", "1234"}} // multi-char name
+* "a=1234" = {{"a", "1234"}} // multi-char value
 
 Unusual cases
 
@@ -38,11 +39,11 @@ Unusual cases
 * "a;b=2" = {{"a", ""}, {"b", "2"}} // no value provided
 * "a=1;2" = {{"a", "1"}, {"2", ""}} // semicolon seemingly in value
 * "a=1;a=2" = {{"a", "2"}} // multiple values for same name
-* "" = {}
+* "" = {} // empty string
 
 Exceptional cases
 
-* null = Exception!
+* null = Exception! // null string
 * "=1" = Exception! // no name given
 
 ## Footnotes
