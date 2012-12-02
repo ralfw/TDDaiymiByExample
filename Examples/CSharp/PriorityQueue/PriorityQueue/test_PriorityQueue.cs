@@ -26,12 +26,21 @@ namespace Systen.Collections.Generic
         }
 
         [Test]
-        public void Enqueue_with_different_priority_but_in_reverse_order()
+        public void Enqueue_with_different_priorities_in_reverse_order()
         {
             _queue.Insert(0, new Element("c", 1));
             _queue.Insert(0, new Element("b", 5));
             _queue.Insert(0, new Element("a", 10));
             Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) }));    
+        }
+
+        [Test]
+        public void Enqueue_with_different_priorities_in_no_order()
+        {
+            _queue.Insert(0, new Element("b", 5));
+            _queue.Insert(0, new Element("c", 1));
+            _queue.Insert(0, new Element("a", 10));
+            Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) }));  
         }
 
 
