@@ -85,6 +85,12 @@ namespace ToDictionary
             Assert.That(assignments, Is.EqualTo(new[]{"a=1", "2"}));
         }
 
+        [Test]
+        public void Skipping_consecutive_semicolons()
+        {
+            var assignments = Split_into_assignments("a=1;;b=2");
+            Assert.That(assignments, Is.EqualTo(new[]{"a=1", "b=2"}));
+        }
 
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
