@@ -72,13 +72,7 @@ namespace ToDictionary
         [Test]
         public void No_value_provided()
         {
-            var assignment = "a";
-
-            var indexOfEqual = assignment.IndexOf("=");
-            var name = assignment.Substring(0, indexOfEqual >= 0 ? indexOfEqual : assignment.Length).Trim();
-            var value = indexOfEqual >= 0 ? assignment.Substring(indexOfEqual + 1) : "";
-            var kvp = new KeyValuePair<string, string>(name, value);
-
+            var kvp = Split_assignment("a");
             Assert.AreEqual("a", kvp.Key);
             Assert.AreEqual("", kvp.Value);
         }
@@ -87,8 +81,8 @@ namespace ToDictionary
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
             var indexOfEqual = assignment.IndexOf("=");
-            var name = assignment.Substring(0, indexOfEqual).Trim();
-            var value = assignment.Substring(indexOfEqual + 1);
+            var name = assignment.Substring(0, indexOfEqual >= 0 ? indexOfEqual : assignment.Length).Trim();
+            var value = indexOfEqual >= 0 ? assignment.Substring(indexOfEqual + 1) : "";
             return new KeyValuePair<string, string>(name,value);
         } 
 
