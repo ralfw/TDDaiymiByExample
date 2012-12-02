@@ -65,8 +65,9 @@ namespace ToDictionary
         [Test]
         public void Equal_sign_in_value()
         {
-            var splitAssignment = "a==".Split('=');
-            var value = splitAssignment[1];
+            var assignment = "a==";
+            var indexOfEqual = assignment.IndexOf("=");
+            var value = assignment.Substring(indexOfEqual + 1);
             Assert.AreEqual("=", value);
         }
 
