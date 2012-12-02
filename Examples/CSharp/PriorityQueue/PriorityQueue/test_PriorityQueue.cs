@@ -12,19 +12,17 @@ namespace Systen.Collections.Generic
         [Test]
         public void Enqueue_into_empty_queue()
         {
-            var queue = new List<Element>();
-            queue.Add(new Element("a", 10));
-            Assert.That(queue, Is.EqualTo(new[]{new Element("a", 10)}));
+            Enqueue<string>("a", 10);
+            Assert.That(_queue, Is.EqualTo(new[]{new Element("a", 10)}));
         }
 
         [Test]
         public void Enqueue_with_same_prio()
         {
-            var queue = new List<Element>();
-            queue.Add(new Element("a", 5));
-            queue.Add(new Element("b", 5));
-            queue.Add(new Element("c", 5));
-            Assert.That(queue, Is.EqualTo(new[] { new Element("a", 5), new Element("b", 5), new Element("c", 5) }));            
+            Enqueue<string>("a", 5);
+            Enqueue<string>("b", 5);
+            Enqueue<string>("c", 5);
+            Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 5), new Element("b", 5), new Element("c", 5) }));            
         }
 
 
@@ -33,6 +31,20 @@ namespace Systen.Collections.Generic
             public object Value;
             public int Priority;
             public Element(object value, int priority) { Value = value; Priority = priority; }
+        }
+
+
+        [SetUp]
+        public void Initialize()
+        {
+            _queue = new List<Element>();
+        }
+
+        private List<Element> _queue;
+
+        internal void Enqueue<T>(T value, int priority)
+        {
+            _queue.Add(new Element(value, priority));
         }
     }
 }
