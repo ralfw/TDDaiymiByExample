@@ -46,6 +46,17 @@ namespace ToDictionary
         }
 
 
+        [Test]
+        public void Whitespace_in_name()
+        {
+            var kvp = Split_assignment(" a =1");
+            var name = kvp.Key.Trim();
+            Assert.AreEqual("a", name);
+        }
+
+
+
+
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
             var splitAssignment = assignment.Split('=');
