@@ -106,6 +106,16 @@ namespace ToDictionary
             Assert.That(dict, Is.EqualTo(new Dictionary<string,string>()));
         }
 
+        [Test]
+        public void Null_as_input()
+        {
+            Assert.Throws<NullReferenceException>(() =>
+                              {
+                                  Split_into_assignments(null);
+                              });
+        }
+
+
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
             var indexOfEqual = assignment.IndexOf("=");
