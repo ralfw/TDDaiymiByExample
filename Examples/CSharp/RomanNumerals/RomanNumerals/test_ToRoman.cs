@@ -29,11 +29,18 @@ namespace RomanNumerals
             return ToRoman("", decimalNumber);
         }
 
-        [Test]
-        public void Decimal_needs_to_be_build_from_repeating_building_blocks()
+        [TestCase(7, Result = "VII")]
+        public string Decimal_needs_to_be_build_from_repeating_building_blocks(int decimalNumber)
         {
-            var roman = ToRoman("", 7);
-            Assert.AreEqual("VII", roman);
+            return ToRoman("", decimalNumber);
+        }
+
+        [TestCase(1999, Result = "MCMXCIX")]
+        [TestCase(3000, Result = "MMM")]
+        [TestCase(1954, Result = "MCMLIV")]
+        public string Acceptance_tests(int decimalNumber)
+        {
+            return ToRoman("", decimalNumber);
         }
 
 
