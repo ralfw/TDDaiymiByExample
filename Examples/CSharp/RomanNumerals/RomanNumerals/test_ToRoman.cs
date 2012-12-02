@@ -29,10 +29,22 @@ namespace RomanNumerals
         [Test]
         public void Decimal_needs_to_be_build_from_repeating_building_blocks()
         {
-            var roman = "" + _romanNumerals[5];
+            var decimalNumber = 7;
+
+            var buildingBlockKey = 5;
+            decimalNumber -= buildingBlockKey;
+            var roman = "" + _romanNumerals[buildingBlockKey];
+
+            buildingBlockKey = 1;
+            decimalNumber -= buildingBlockKey;
+            roman = roman + _romanNumerals[buildingBlockKey];
+
+            buildingBlockKey = 1;
+            decimalNumber -= buildingBlockKey;
             roman = roman + _romanNumerals[1];
-            roman = roman + _romanNumerals[1];
+
             Assert.AreEqual("VII", roman);
+            Assert.AreEqual(0, decimalNumber);
         }
     }
 }
