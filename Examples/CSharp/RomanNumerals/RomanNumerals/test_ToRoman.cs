@@ -9,30 +9,29 @@ namespace RomanNumerals
     [TestFixture]
     public class test_ToRoman
     {
+        private readonly Dictionary<int,string> _romanNumerals = new Dictionary<int, string> {{5, "V"}, {1, "I"}};
+
         [Test]
         public void Decimal_matches_building_block()
         {
-            var romanNumerals = new Dictionary<int, string> {{5, "V"}};
-            var roman = "" + romanNumerals[5];
+            var roman = "" + _romanNumerals[5];
             Assert.AreEqual("V", roman);
         }
 
         [Test]
         public void Decimal_needs_to_be_build_from_non_repeating_building_blocks()
         {
-            var romanNumerals = new Dictionary<int, string> {{5, "V"}, {1, "I"}};
-            var roman = "" + romanNumerals[5];
-            roman = roman + romanNumerals[1];
+            var roman = "" + _romanNumerals[5];
+            roman = roman + _romanNumerals[1];
             Assert.AreEqual("VI", roman);
         }
 
         [Test]
         public void Decimal_needs_to_be_build_from_repeating_building_blocks()
         {
-            var romanNumerals = new Dictionary<int, string> { { 5, "V" }, { 1, "I" } };
-            var roman = "" + romanNumerals[5];
-            roman = roman + romanNumerals[1];
-            roman = roman + romanNumerals[1];
+            var roman = "" + _romanNumerals[5];
+            roman = roman + _romanNumerals[1];
+            roman = roman + _romanNumerals[1];
             Assert.AreEqual("VII", roman);
         }
     }
