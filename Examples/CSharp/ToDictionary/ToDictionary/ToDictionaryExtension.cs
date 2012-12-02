@@ -12,6 +12,17 @@ namespace ToDictionary
             return Build_dictionary_from_assignments(assignments);
         } 
 
+        internal static IEnumerable<string> Split_into_assignments(string text)
+        {
+            return text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        internal static Dictionary<string, string> Build_dictionary_from_assignments(IEnumerable<string> assignments)
+        {
+            return assignments.Select(Split_assignment)
+                .Aggregate(new Dictionary<string, string>(),
+                           (current, kvp) => Aggregate_dictionary(current, kvp.Key, kvp.Value));
+        }
 
         internal static KeyValuePair<string, string> Split_assignment(string assignment)
         {
@@ -26,18 +37,6 @@ namespace ToDictionary
         {
             dict[name] = value;
             return dict;
-        }
-
-        internal static Dictionary<string, string> Build_dictionary_from_assignments(IEnumerable<string> assignments)
-        {
-            return assignments.Select(Split_assignment)
-                .Aggregate(new Dictionary<string, string>(),
-                           (current, kvp) => Aggregate_dictionary(current, kvp.Key, kvp.Value));
-        }
-
-        internal static IEnumerable<string> Split_into_assignments(string text)
-        {
-            return text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
