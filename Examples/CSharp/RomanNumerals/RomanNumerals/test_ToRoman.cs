@@ -33,17 +33,17 @@ namespace RomanNumerals
         {
             var decimalNumber = 7;
 
-            var buildingBlockKey = 5;
-            var roman = "" + _romanNumerals.First(kvp => kvp.Key <= decimalNumber).Value;
-            decimalNumber -= buildingBlockKey;
+            var buildingBlock = _romanNumerals.First(kvp => kvp.Key <= decimalNumber);
+            var roman = "" + buildingBlock.Value;
+            decimalNumber -= buildingBlock.Key;
 
-            buildingBlockKey = 1;
-            roman = roman + _romanNumerals.First(kvp => kvp.Key <= decimalNumber).Value;
-            decimalNumber -= buildingBlockKey;
+            buildingBlock = _romanNumerals.First(kvp => kvp.Key <= decimalNumber);
+            roman = roman + buildingBlock.Value;
+            decimalNumber -= buildingBlock.Key;
 
-            buildingBlockKey = 1;
-            roman = roman + _romanNumerals.First(kvp => kvp.Key <= decimalNumber).Value;
-            decimalNumber -= buildingBlockKey;
+            buildingBlock = _romanNumerals.First(kvp => kvp.Key <= decimalNumber);
+            roman = roman + buildingBlock.Value;
+            decimalNumber -= buildingBlock.Key;
 
             Assert.AreEqual("VII", roman);
             Assert.AreEqual(0, decimalNumber);
