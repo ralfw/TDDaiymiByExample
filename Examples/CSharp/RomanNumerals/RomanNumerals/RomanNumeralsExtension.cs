@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +8,14 @@ namespace RomanNumerals
     {
         public static string ToRoman(this int decimalNumber)
         {
+            Check_range(decimalNumber);
             return ToRoman("", decimalNumber);
+        }
+
+        private static void Check_range(int decimalNumber)
+        {
+            if (decimalNumber <= 0 || decimalNumber > 3000)
+                throw new ArgumentException("Decimal number must be in range of 1..3000 to be converted to a roman numeral.");
         }
 
 
