@@ -29,8 +29,9 @@ Now, to convert a decimal number to roman numerals you can iteratively find the 
 * 5 = "V" // decimal matches building block
 * 9 = "IX"
 * 400 = "CD"
-* 6 = "VI" // decimal needs to be build from multiple building blocks
+* 6 = "VI" // decimal needs to be build from non-repeating building blocks
 * 906 = "CMVI"
+* 7 = "VII" // decimal needs to be build from repeating building blocks
 * 1999 = "MCMXCIX" // acceptance tests
 * 3000 = "MMM"
 * 1954 = "MCMLIV"
