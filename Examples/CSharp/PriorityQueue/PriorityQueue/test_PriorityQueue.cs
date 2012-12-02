@@ -51,6 +51,13 @@ namespace Systen.Collections.Generic
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => { var _ = _queue[0].Value; });
         }
+
+        [Test]
+        public void Peek_on_non_empty()
+        {
+            Enqueue("a", 1);
+            Assert.AreEqual("a", _queue[0].Value);
+        }
         #endregion
 
         #region Dequeue
