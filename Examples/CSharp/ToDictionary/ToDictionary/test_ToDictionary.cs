@@ -96,8 +96,8 @@ namespace ToDictionary
         public void Multiple_values_for_same_name()
         {
             var dict = new Dictionary<string, string>();
-            dict.Add("a", "1");
-            dict.Add("a", "2");
+            dict["a"] = "1";
+            dict["a"] = "2";
             Assert.That(dict, Is.EqualTo(new Dictionary<string,string>{{"a", "2"}}));
         }
 
