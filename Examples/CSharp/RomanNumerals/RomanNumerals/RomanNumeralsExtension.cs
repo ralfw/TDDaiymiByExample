@@ -12,6 +12,7 @@ namespace RomanNumerals
             return ToRoman("", decimalNumber);
         }
 
+
         private static void Check_range(int decimalNumber)
         {
             if (decimalNumber <= 0 || decimalNumber > 3000)
@@ -40,6 +41,7 @@ namespace RomanNumerals
                                                     new KeyValuePair<int, string>(90, "XC"),
                                                     new KeyValuePair<int, string>(50, "L"),
                                                     new KeyValuePair<int, string>(40, "XL"),
+                                                    new KeyValuePair<int, string>(10, "X"),
                                                     new KeyValuePair<int, string>(9, "IX"),
                                                     new KeyValuePair<int, string>(5, "V"), 
                                                     new KeyValuePair<int, string>(4, "IV"),
