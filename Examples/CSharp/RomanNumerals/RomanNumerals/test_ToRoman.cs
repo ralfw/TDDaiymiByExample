@@ -12,6 +12,7 @@ namespace RomanNumerals
         [Test]
         public void Decimal_matches_building_block()
         {
+            var roman = new Dictionary<int, string>() {{5, "V"}}[5];
             Assert.AreEqual("V", roman);
         }
     }
