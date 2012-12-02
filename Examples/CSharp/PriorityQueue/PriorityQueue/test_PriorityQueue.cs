@@ -12,42 +12,35 @@ namespace Systen.Collections.Generic
         [Test]
         public void Enqueue_into_empty_queue()
         {
-            Enqueue<string>("a", 10);
+            Enqueue("a", 10);
             Assert.That(_queue, Is.EqualTo(new[]{new Element("a", 10)}));
         }
 
         [Test]
         public void Enqueue_with_same_prio()
         {
-            Enqueue<string>("a", 5);
-            Enqueue<string>("b", 5);
-            Enqueue<string>("c", 5);
+            Enqueue("a", 5);
+            Enqueue("b", 5);
+            Enqueue("c", 5);
             Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 5), new Element("b", 5), new Element("c", 5) }));            
         }
 
         [Test]
         public void Enqueue_with_different_priorities_in_reverse_order()
         {
-            _queue.Insert(0, new Element("c", 1));
-            _queue.Insert(0, new Element("b", 5));
-            _queue.Insert(0, new Element("a", 10));
+            Enqueue("c", 1);
+            Enqueue("b", 5);
+            Enqueue("a", 10);
             Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) }));    
         }
 
         [Test]
         public void Enqueue_with_different_priorities_in_no_order()
         {
-            _queue.Insert(0, new Element("b", 5));
-
-            var indexOfLowerPrioElement = _queue.Where(e => e.Priority < 1).Select((e, i) => i).Take(1).ToList();
-            if (!indexOfLowerPrioElement.Any())
-                _queue.Add(new Element("c", 1));
-
-            indexOfLowerPrioElement = _queue.Where(e => e.Priority < 10).Select((e, i) => i).Take(1).ToList();
-            if (indexOfLowerPrioElement.Any())
-                _queue.Insert(indexOfLowerPrioElement.First(), new Element("a", 10));
-
-            Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) }));  
+            Enqueue("b", 5);
+            Enqueue("c", 1);
+            Enqueue("a", 10);
+            Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) })); 
         }
 
 
@@ -65,11 +58,19 @@ namespace Systen.Collections.Generic
             _queue = new List<Element>();
         }
 
+
         private List<Element> _queue;
 
         internal void Enqueue<T>(T value, int priority)
         {
-            _queue.Add(new Element(value, priority));
+            var indexOfLowerPrioElement = _queue.Where(e => e.Priority < priority)
+                                                .Select((e, i) => i)
+                                                .Take(1)
+                                                .ToList();
+            if (indexOfLowerPrioElement.Any())
+                _queue.Insert(indexOfLowerPrioElement.First(), new Element(value, priority));
+            else
+                _queue.Add(new Element(value, priority));
         }
     }
 }
