@@ -9,6 +9,7 @@ namespace Systen.Collections.Generic
     [TestFixture]
     public class test_PriorityQueue
     {
+        #region Enqueue
         [Test]
         public void Enqueue_into_empty_queue()
         {
@@ -42,6 +43,31 @@ namespace Systen.Collections.Generic
             Enqueue("a", 10);
             Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) })); 
         }
+        #endregion
+
+        #region Peek
+        [Test]
+        public void Peek_on_empty()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => { var _ = _queue[0].Value; });
+        }
+        #endregion
+
+        #region Dequeue
+        #endregion
+
+        #region Count
+        #endregion
+
+        #region Clear
+        #endregion
+
+
+        [SetUp]
+        public void Initialize()
+        {
+            _queue = new List<Element>();
+        }
 
 
         struct Element
@@ -49,13 +75,6 @@ namespace Systen.Collections.Generic
             public object Value;
             public int Priority;
             public Element(object value, int priority) { Value = value; Priority = priority; }
-        }
-
-
-        [SetUp]
-        public void Initialize()
-        {
-            _queue = new List<Element>();
         }
 
 
