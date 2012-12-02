@@ -39,7 +39,9 @@ namespace Systen.Collections.Generic
         {
             _queue.Insert(0, new Element("b", 5));
             _queue.Add(new Element("c", 1));
-            _queue.Insert(0, new Element("a", 10));
+            var indexOfLowerPrioElement = _queue.Where(e => e.Priority < 10).Select((e, i) => i).First();
+            _queue.Insert(indexOfLowerPrioElement, new Element("a", 10));
+
             Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) }));  
         }
 
