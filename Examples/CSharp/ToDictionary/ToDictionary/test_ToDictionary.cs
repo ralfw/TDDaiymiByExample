@@ -55,6 +55,12 @@ namespace ToDictionary
         }
 
 
+        [Test]
+        public void Whitespace_in_value()
+        {
+            var kvp = Split_assignment("a= 1 ");
+            Assert.AreEqual(" 1 ", kvp.Value);
+        }
 
 
         static KeyValuePair<string,string> Split_assignment(string assignment)
