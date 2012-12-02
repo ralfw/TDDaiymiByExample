@@ -9,5 +9,10 @@ namespace RomanNumerals
     [TestFixture]
     public class test_ToRoman
     {
+        [Test]
+        public void Decimal_matches_building_block()
+        {
+            Assert.AreEqual("V", roman);
+        }
     }
 }
