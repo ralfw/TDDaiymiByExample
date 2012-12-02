@@ -38,9 +38,14 @@ namespace Systen.Collections.Generic
         public void Enqueue_with_different_priorities_in_no_order()
         {
             _queue.Insert(0, new Element("b", 5));
-            _queue.Add(new Element("c", 1));
-            var indexOfLowerPrioElement = _queue.Where(e => e.Priority < 10).Select((e, i) => i).First();
-            _queue.Insert(indexOfLowerPrioElement, new Element("a", 10));
+
+            var indexOfLowerPrioElement = _queue.Where(e => e.Priority < 1).Select((e, i) => i).Take(1).ToList();
+            if (!indexOfLowerPrioElement.Any())
+                _queue.Add(new Element("c", 1));
+
+            indexOfLowerPrioElement = _queue.Where(e => e.Priority < 10).Select((e, i) => i).Take(1).ToList();
+            if (indexOfLowerPrioElement.Any())
+                _queue.Insert(indexOfLowerPrioElement.First(), new Element("a", 10));
 
             Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) }));  
         }
