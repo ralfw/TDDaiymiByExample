@@ -16,7 +16,6 @@ namespace RomanNumerals
             Assert.AreEqual("V", roman);
         }
 
-
         [Test]
         public void Decimal_needs_to_be_build_from_non_repeating_building_blocks()
         {
@@ -24,6 +23,16 @@ namespace RomanNumerals
             var roman = romanNumerals[5];
             roman = roman + romanNumerals[1];
             Assert.AreEqual("VI", roman);
+        }
+
+        [Test]
+        public void Decimal_needs_to_be_build_from_repeating_building_blocks()
+        {
+            var romanNumerals = new Dictionary<int, string> { { 5, "V" }, { 1, "I" } };
+            var roman = romanNumerals[5];
+            roman = roman + romanNumerals[1];
+            roman = roman + romanNumerals[1];
+            Assert.AreEqual("VII", roman);
         }
     }
 }
