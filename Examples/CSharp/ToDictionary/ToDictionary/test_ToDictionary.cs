@@ -130,6 +130,13 @@ namespace ToDictionary
 
     public static class ToDictionaryExtension
     {
+        public static Dictionary<string,string> ToDictionary(this string text)
+        {
+            var assignments = Split_into_assignments(text);
+            return Build_dictionary_from_assignments(assignments);
+        } 
+
+
         internal static KeyValuePair<string, string> Split_assignment(string assignment)
         {
             var indexOfEqual = assignment.IndexOf("=");
