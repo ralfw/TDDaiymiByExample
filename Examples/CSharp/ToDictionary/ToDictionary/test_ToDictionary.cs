@@ -120,6 +120,13 @@ namespace ToDictionary
         }
 
 
+        [Test]
+        public void Integration_test_for_extension_method()
+        {
+            Assert.That("a=1;b=2".ToDictionary(), Is.EqualTo(new Dictionary<string,string>{{"a", "1"},{"b", "2"}}));
+        }
+
+
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
             var indexOfEqual = assignment.IndexOf("=");
