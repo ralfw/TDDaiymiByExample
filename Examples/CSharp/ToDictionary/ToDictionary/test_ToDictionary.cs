@@ -109,10 +109,14 @@ namespace ToDictionary
         [Test]
         public void Null_as_input()
         {
-            Assert.Throws<NullReferenceException>(() =>
-                              {
-                                  Split_into_assignments(null);
-                              });
+            Assert.Throws<NullReferenceException>(() => Split_into_assignments(null));
+        }
+
+
+        [Test]
+        public void No_name_given()
+        {
+            Assert.Throws<ArgumentException>(() => Build_dictionary_from_assignments(new[] {"=1"}));
         }
 
 
