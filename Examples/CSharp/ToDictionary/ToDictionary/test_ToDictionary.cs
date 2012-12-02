@@ -89,7 +89,6 @@ namespace ToDictionary
         public void Skipping_consecutive_semicolons()
         {
             var assignments = Split_into_assignments("a=1;;b=2");
-            assignments = assignments.Where(a => a != "");
             Assert.That(assignments, Is.EqualTo(new[]{"a=1", "b=2"}));
         }
 
@@ -116,7 +115,7 @@ namespace ToDictionary
 
         static IEnumerable<string> Split_into_assignments(string text)
         {
-            return text.Split(';');
+            return text.Split(';').Where(a => a != "");
         } 
     }
 }
