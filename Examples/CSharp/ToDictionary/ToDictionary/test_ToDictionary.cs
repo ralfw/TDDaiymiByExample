@@ -72,10 +72,13 @@ namespace ToDictionary
         [Test]
         public void No_value_provided()
         {
-            var indexOfEqual = "a".IndexOf("=");
-            var name = "a".Substring(0, indexOfEqual).Trim();
-            var value = "a".Substring(indexOfEqual + 1);
+            var assignment = "a";
+
+            var indexOfEqual = assignment.IndexOf("=");
+            var name = assignment.Substring(0, indexOfEqual >= 0 ? indexOfEqual : assignment.Length).Trim();
+            var value = indexOfEqual >= 0 ? assignment.Substring(indexOfEqual + 1) : "";
             var kvp = new KeyValuePair<string, string>(name, value);
+
             Assert.AreEqual("a", kvp.Key);
             Assert.AreEqual("", kvp.Value);
         }
