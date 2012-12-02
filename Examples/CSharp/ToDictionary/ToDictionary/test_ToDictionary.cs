@@ -115,7 +115,7 @@ namespace ToDictionary
 
         static IEnumerable<string> Split_into_assignments(string text)
         {
-            return text.Split(';').Where(a => a != "");
+            return text.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
         } 
     }
 }
