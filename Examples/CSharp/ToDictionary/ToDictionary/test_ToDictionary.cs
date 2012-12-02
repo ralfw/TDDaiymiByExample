@@ -95,7 +95,8 @@ namespace ToDictionary
         [Test]
         public void Multiple_values_for_same_name()
         {
-            var dict = Build_dictionary_from_assignments(new[] {"a=1", "a=2"});
+            var dict = Aggregate_dictionary(new Dictionary<string, string>(), "a", "1");
+            dict = Aggregate_dictionary(dict, "a", "2");
             Assert.That(dict, Is.EqualTo(new Dictionary<string,string>{{"a", "2"}}));
         }
 
