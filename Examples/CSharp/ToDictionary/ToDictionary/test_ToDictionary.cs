@@ -116,11 +116,7 @@ namespace ToDictionary
         [Test]
         public void No_name_given()
         {
-            Assert.Throws<ArgumentException>(() =>
-                                                 {
-                                                     var kvp = Split_assignment("=1");
-                                                     if (kvp.Key == "") throw new ArgumentException();
-                                                 });
+            Assert.Throws<ArgumentException>(() => Split_assignment("=1"));
         }
 
 
@@ -128,6 +124,7 @@ namespace ToDictionary
         {
             var indexOfEqual = assignment.IndexOf("=");
             var name = assignment.Substring(0, indexOfEqual >= 0 ? indexOfEqual : assignment.Length).Trim();
+            if (name == "") throw new ArgumentException("Missing name for value: " + assignment);
             var value = indexOfEqual >= 0 ? assignment.Substring(indexOfEqual + 1) : "";
             return new KeyValuePair<string, string>(name,value);
         } 
