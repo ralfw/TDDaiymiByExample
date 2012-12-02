@@ -10,6 +10,7 @@ namespace RomanNumerals
     public class test_ToRoman
     {
         private readonly List<KeyValuePair<int,string>> _romanNumerals = new List<KeyValuePair<int,string>> { 
+                                                                                new KeyValuePair<int, string>(900, "CM"),
                                                                                 new KeyValuePair<int, string>(9, "IX"),
                                                                                 new KeyValuePair<int, string>(5, "V"), 
                                                                                 new KeyValuePair<int, string>(1, "I")};
@@ -21,11 +22,11 @@ namespace RomanNumerals
             return ToRoman("", decimalNumber);
         }
 
-        [Test]
-        public void Decimal_needs_to_be_build_from_non_repeating_building_blocks()
+        [TestCase(6, Result = "VI")]
+        [TestCase(906, Result = "CMVI")]
+        public string Decimal_needs_to_be_build_from_non_repeating_building_blocks(int decimalNumber)
         {
-            var roman = ToRoman("", 6);
-            Assert.AreEqual("VI", roman);
+            return ToRoman("", decimalNumber);
         }
 
         [Test]
