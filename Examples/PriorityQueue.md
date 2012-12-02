@@ -56,12 +56,14 @@ In order to make the solution a tad more exciting and to reach higher performanc
 ## Test Cases
 
 * Enqueue into empty queue
-* Peek
+* Peek into empty queue = Exception!
+* Peek into non-empty queue
 * Dequeue single
+* Dequeue from empty queue = Exception!
 * Count single
 * Enqueue with same priority
 * Dequeue multiple
 * Count multiple
 * Clear
-* Enqueue with different priorities but in order
-* Enqueue with different priorities but not in order
+* Enqueue with different priorities but in reverse order
+* Enqueue with different priorities but in no order

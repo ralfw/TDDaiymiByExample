@@ -25,6 +25,15 @@ namespace Systen.Collections.Generic
             Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 5), new Element("b", 5), new Element("c", 5) }));            
         }
 
+        [Test]
+        public void Enqueue_with_different_priority_but_in_reverse_order()
+        {
+            Enqueue<string>("c", 1);
+            Enqueue<string>("b", 5);
+            Enqueue<string>("a", 10);
+            Assert.That(_queue, Is.EqualTo(new[] { new Element("a", 10), new Element("b", 5), new Element("c", 1) }));    
+        }
+
 
         struct Element
         {
