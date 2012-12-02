@@ -36,7 +36,7 @@ Unusual cases
 * " a =1" = {{"a", "1"}} // whitespace in name
 * "a= 1 " = {{"a", " 1 "}} // whitespace in value
 * "a==" = {{"a", "="}} // "=" in value
-* "a;b=2" = {{"a", ""}, {"b", "2"}} // no value provided
+* "a" = {{"a", ""}} // no value provided
 * "a=1;2" = {{"a", "1"}, {"2", ""}} // semicolon seemingly in value
 * "a=1;a=2" = {{"a", "2"}} // multiple values for same name
 * "" = {} // empty string

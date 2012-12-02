@@ -78,6 +78,14 @@ namespace ToDictionary
         }
 
 
+        [Test]
+        public void Semicolon_seemingly_in_value()
+        {
+            var assignments = "a=1;2".Split(';');
+            Assert.That(assignments, Is.EqualTo(new[]{"a=1", "2"}));
+        }
+
+
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
             var indexOfEqual = assignment.IndexOf("=");
