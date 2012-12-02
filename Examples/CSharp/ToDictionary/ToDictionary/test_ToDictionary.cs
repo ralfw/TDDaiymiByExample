@@ -12,36 +12,36 @@ namespace ToDictionary
         [Test]
         public void Single_name_value_pair()
         {
-            var result = Build_dictionary_from_assignments(new[] {"a=1"});
-            Assert.That(result, Is.EqualTo(new Dictionary<string,string>{{"a", "1"}}));
+            var result = ToDictionaryExtension.Build_dictionary_from_assignments(new[] {"a=1"});
+            Assert.That(result, Is.EqualTo(new Dictionary<string, string> {{"a", "1"}}));
         }
 
         [Test]
         public void Multiple_name_value_pairs()
         {
-            var nvpairs = Split_into_assignments("a=1;b=2");
-            var result = Build_dictionary_from_assignments(nvpairs);
-            Assert.That(result, Is.EqualTo(new Dictionary<string,string>{{"a", "1"},{"b", "2"}}));
+            var nvpairs = ToDictionaryExtension.Split_into_assignments("a=1;b=2");
+            var result = ToDictionaryExtension.Build_dictionary_from_assignments(nvpairs);
+            Assert.That(result, Is.EqualTo(new Dictionary<string, string> {{"a", "1"},{"b", "2"}}));
         }
 
         [Test]
         public void Multi_char_name()
         {
-            var kvp = Split_assignment("abc=1");
+            var kvp = ToDictionaryExtension.Split_assignment("abc=1");
             Assert.AreEqual("abc", kvp.Key);
         }
 
         [Test]
         public void Multi_char_value()
         {
-            var kvp = Split_assignment("a=1234");
+            var kvp = ToDictionaryExtension.Split_assignment("a=1234");
             Assert.AreEqual("1234", kvp.Value);
         }
 
         [Test]
         public void Empty_value()
         {
-            var kvp = Split_assignment("a=");
+            var kvp = ToDictionaryExtension.Split_assignment("a=");
             Assert.AreEqual("", kvp.Value);
         }
 
@@ -49,7 +49,7 @@ namespace ToDictionary
         [Test]
         public void Whitespace_in_name()
         {
-            var kvp = Split_assignment(" a =1");
+            var kvp = ToDictionaryExtension.Split_assignment(" a =1");
             Assert.AreEqual("a", kvp.Key);
         }
 
@@ -57,14 +57,14 @@ namespace ToDictionary
         [Test]
         public void Whitespace_in_value()
         {
-            var kvp = Split_assignment("a= 1 ");
+            var kvp = ToDictionaryExtension.Split_assignment("a= 1 ");
             Assert.AreEqual(" 1 ", kvp.Value);
         }
 
         [Test]
         public void Equal_sign_in_value()
         {
-            var kvp = Split_assignment("a==");
+            var kvp = ToDictionaryExtension.Split_assignment("a==");
             Assert.AreEqual("=", kvp.Value);
         }
 
@@ -72,7 +72,7 @@ namespace ToDictionary
         [Test]
         public void No_value_provided()
         {
-            var kvp = Split_assignment("a");
+            var kvp = ToDictionaryExtension.Split_assignment("a");
             Assert.AreEqual("a", kvp.Key);
             Assert.AreEqual("", kvp.Value);
         }
@@ -81,77 +81,80 @@ namespace ToDictionary
         [Test]
         public void Semicolon_seemingly_in_value()
         {
-            var assignments = Split_into_assignments("a=1;2");
+            var assignments = ToDictionaryExtension.Split_into_assignments("a=1;2");
             Assert.That(assignments, Is.EqualTo(new[]{"a=1", "2"}));
         }
 
         [Test]
         public void Skipping_consecutive_semicolons()
         {
-            var assignments = Split_into_assignments("a=1;;b=2");
+            var assignments = ToDictionaryExtension.Split_into_assignments("a=1;;b=2");
             Assert.That(assignments, Is.EqualTo(new[]{"a=1", "b=2"}));
         }
 
         [Test]
         public void Multiple_values_for_same_name()
         {
-            var dict = Build_dictionary_from_assignments(new[] {"a=1", "a=2"});
-            Assert.That(dict, Is.EqualTo(new Dictionary<string,string>{{"a", "2"}}));
+            var dict = ToDictionaryExtension.Build_dictionary_from_assignments(new[] {"a=1", "a=2"});
+            Assert.That(dict, Is.EqualTo(new Dictionary<string, string> {{"a", "2"}}));
         }
 
         [Test]
         public void Empty_string()
         {
-            var dict = Build_dictionary_from_assignments(new string[]{});
-            Assert.That(dict, Is.EqualTo(new Dictionary<string,string>()));
+            var dict = ToDictionaryExtension.Build_dictionary_from_assignments(new string[]{});
+            Assert.That(dict, Is.EqualTo(new Dictionary<string, string>()));
         }
 
         [Test]
         public void Null_as_input()
         {
-            Assert.Throws<NullReferenceException>(() => Split_into_assignments(null));
+            Assert.Throws<NullReferenceException>(() => ToDictionaryExtension.Split_into_assignments(null));
         }
 
 
         [Test]
         public void No_name_given()
         {
-            Assert.Throws<ArgumentException>(() => Split_assignment("=1"));
+            Assert.Throws<ArgumentException>(() => ToDictionaryExtension.Split_assignment("=1"));
         }
 
 
         [Test]
         public void Integration_test_for_extension_method()
         {
-            Assert.That("a=1;b=2".ToDictionary(), Is.EqualTo(new Dictionary<string,string>{{"a", "1"},{"b", "2"}}));
+            Assert.That("a=1;b=2".ToDictionary(), Is.EqualTo(new Dictionary<string, string> {{"a", "1"},{"b", "2"}}));
         }
+    }
 
 
-        static KeyValuePair<string,string> Split_assignment(string assignment)
+    public static class ToDictionaryExtension
+    {
+        internal static KeyValuePair<string, string> Split_assignment(string assignment)
         {
             var indexOfEqual = assignment.IndexOf("=");
             var name = assignment.Substring(0, indexOfEqual >= 0 ? indexOfEqual : assignment.Length).Trim();
             if (name == "") throw new ArgumentException("Missing name for value: " + assignment);
             var value = indexOfEqual >= 0 ? assignment.Substring(indexOfEqual + 1) : "";
-            return new KeyValuePair<string, string>(name,value);
-        } 
+            return new KeyValuePair<string, string>(name, value);
+        }
 
-        static Dictionary<string,string> Aggregate_dictionary(Dictionary<string,string> dict, string name, string value)
+        internal static Dictionary<string, string> Aggregate_dictionary(Dictionary<string, string> dict, string name, string value)
         {
             dict[name] = value;
             return dict;
         }
 
-        static Dictionary<string,string> Build_dictionary_from_assignments(IEnumerable<string> assignments)
+        internal static Dictionary<string, string> Build_dictionary_from_assignments(IEnumerable<string> assignments)
         {
             return assignments.Select(Split_assignment)
-                              .Aggregate(new Dictionary<string, string>(), 
-                                         (current, kvp) => Aggregate_dictionary(current, kvp.Key, kvp.Value));
-        } 
+                .Aggregate(new Dictionary<string, string>(),
+                           (current, kvp) => Aggregate_dictionary(current, kvp.Key, kvp.Value));
+        }
 
-        static IEnumerable<string> Split_into_assignments(string text)
+        internal static IEnumerable<string> Split_into_assignments(string text)
         {
-            return text.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries);
-        } 
+            return text.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+        }
     }
 }
