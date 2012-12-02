@@ -27,6 +27,13 @@ namespace RomanNumerals
             return RomanNumeralsExtension.ToRoman("", decimalNumber);
         }
 
+        [TestCase(3001)]
+        [TestCase(0)]
+        public void Outside_of_range(int decimalNumber)
+        {
+            Assert.Throws<ArgumentException>(() => decimalNumber.ToRoman());
+        }
+
         [TestCase(1999, Result = "MCMXCIX")]
         [TestCase(3000, Result = "MMM")]
         [TestCase(1954, Result = "MCMLIV")]

@@ -35,3 +35,5 @@ Now, to convert a decimal number to roman numerals you can iteratively find the 
 * 1999 = "MCMXCIX" // acceptance tests
 * 3000 = "MMM"
 * 1954 = "MCMLIV"
+* 3001 = Exception! // outside of range
+* 0 = Exception!
