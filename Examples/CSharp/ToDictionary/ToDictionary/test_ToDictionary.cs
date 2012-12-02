@@ -99,6 +99,12 @@ namespace ToDictionary
             Assert.That(dict, Is.EqualTo(new Dictionary<string,string>{{"a", "2"}}));
         }
 
+        [Test]
+        public void Empty_string()
+        {
+            var dict = Build_dictionary_from_assignments(new string[]{});
+            Assert.That(dict, Is.EqualTo(new Dictionary<string,string>()));
+        }
 
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
