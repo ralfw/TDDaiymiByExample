@@ -10,14 +10,15 @@ namespace RomanNumerals
     public class test_ToRoman
     {
         private readonly List<KeyValuePair<int,string>> _romanNumerals = new List<KeyValuePair<int,string>> { 
+                                                                                new KeyValuePair<int, string>(9, "IX"),
                                                                                 new KeyValuePair<int, string>(5, "V"), 
                                                                                 new KeyValuePair<int, string>(1, "I")};
 
-        [Test]
-        public void Decimal_matches_building_block()
+        [TestCase(5, Result = "V")]
+        [TestCase(9, Result = "IX")]
+        public string Decimal_matches_building_block(int decimalNumber)
         {
-            var roman = ToRoman("", 5);
-            Assert.AreEqual("V", roman);
+            return ToRoman("", decimalNumber);
         }
 
         [Test]
