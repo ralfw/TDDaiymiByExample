@@ -62,6 +62,14 @@ namespace ToDictionary
             Assert.AreEqual(" 1 ", kvp.Value);
         }
 
+        [Test]
+        public void Equal_sign_in_value()
+        {
+            var splitAssignment = "a==".Split('=');
+            var value = splitAssignment[1];
+            Assert.AreEqual("=", value);
+        }
+
 
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
