@@ -92,6 +92,14 @@ namespace ToDictionary
             Assert.That(assignments, Is.EqualTo(new[]{"a=1", "b=2"}));
         }
 
+        [Test]
+        public void Multiple_values_for_same_name()
+        {
+            var dict = Build_dictionary_from_assignments(new[] {"a=1", "a=2"});
+            Assert.That(dict, Is.EqualTo(new Dictionary<string,string>{{"a", "2"}}));
+        }
+
+
         static KeyValuePair<string,string> Split_assignment(string assignment)
         {
             var indexOfEqual = assignment.IndexOf("=");
