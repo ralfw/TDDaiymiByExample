@@ -20,8 +20,8 @@ namespace ToDictionary
         internal static Dictionary<string, string> Build_dictionary_from_assignments(IEnumerable<string> assignments)
         {
             return assignments.Select(Split_assignment)
-                .Aggregate(new Dictionary<string, string>(),
-                           (current, kvp) => Aggregate_dictionary(current, kvp.Key, kvp.Value));
+                              .Aggregate(new Dictionary<string, string>(),
+                                         (current, kvp) => Aggregate_dictionary(current, kvp.Key, kvp.Value));
         }
 
         internal static KeyValuePair<string, string> Split_assignment(string assignment)
