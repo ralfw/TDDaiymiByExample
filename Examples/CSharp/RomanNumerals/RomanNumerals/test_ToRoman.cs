@@ -31,11 +31,7 @@ namespace RomanNumerals
         [TestCase(0)]
         public void Outside_of_range(int decimalNumber)
         {
-            Assert.Throws<ArgumentException>(() =>
-                                                 {
-                                                     if (decimalNumber <= 0 || decimalNumber > 3000) throw new ArgumentException();
-                                                     decimalNumber.ToRoman();
-                                                 });
+            Assert.Throws<ArgumentException>(() => decimalNumber.ToRoman());
         }
 
         [TestCase(1999, Result = "MCMXCIX")]
