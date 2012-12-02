@@ -116,7 +116,7 @@ namespace ToDictionary
         [Test]
         public void No_name_given()
         {
-            Assert.Throws<ArgumentException>(() => Build_dictionary_from_assignments(new[] {"=1"}));
+            Assert.Throws<ArgumentException>(() => Split_assignment("=1"));
         }
 
 
