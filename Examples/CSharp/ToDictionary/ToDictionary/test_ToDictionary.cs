@@ -116,7 +116,11 @@ namespace ToDictionary
         [Test]
         public void No_name_given()
         {
-            Assert.Throws<ArgumentException>(() => Split_assignment("=1"));
+            Assert.Throws<ArgumentException>(() =>
+                                                 {
+                                                     var kvp = Split_assignment("=1");
+                                                     if (kvp.Key == "") throw new ArgumentException();
+                                                 });
         }
 
 
