@@ -19,7 +19,7 @@ namespace ToDictionary
         [Test]
         public void Multiple_name_value_pairs()
         {
-            var nvpairs = "a=1;b=2".Split(';');
+            var nvpairs = Split_into_assignments("a=1;b=2");
             var result = Build_dictionary_from_assignments(nvpairs);
             Assert.That(result, Is.EqualTo(new Dictionary<string,string>{{"a", "1"},{"b", "2"}}));
         }
@@ -81,7 +81,7 @@ namespace ToDictionary
         [Test]
         public void Semicolon_seemingly_in_value()
         {
-            var assignments = "a=1;2".Split(';');
+            var assignments = Split_into_assignments("a=1;2");
             Assert.That(assignments, Is.EqualTo(new[]{"a=1", "2"}));
         }
 
@@ -105,6 +105,11 @@ namespace ToDictionary
             return assignments.Select(Split_assignment)
                               .Aggregate(new Dictionary<string, string>(), 
                                          (current, kvp) => Aggregate_dictionary(current, kvp.Key, kvp.Value));
+        } 
+
+        static IEnumerable<string> Split_into_assignments(string text)
+        {
+            return text.Split(';');
         } 
     }
 }

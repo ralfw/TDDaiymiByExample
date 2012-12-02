@@ -38,6 +38,7 @@ Unusual cases
 * "a==" = {{"a", "="}} // "=" in value
 * "a" = {{"a", ""}} // no value provided
 * "a=1;2" = {{"a", "1"}, {"2", ""}} // semicolon seemingly in value
+* "a=1;;b=2" = {{"a", "1"}, {"b", "2"}} // skipping consecutive semicolons
 * "a=1;a=2" = {{"a", "2"}} // multiple values for same name
 * "" = {} // empty string
 
