@@ -140,17 +140,29 @@ namespace Systen.Collections.Generic
         internal PriorityQueue(List<Element> queue) { _queue = queue; }
         public PriorityQueue() : this(new List<Element>()) {} 
 
+
         public void Enqueue(T value, int priority)
         {
-            var indexOfLowerPrioElement = _queue.Where(e => e.Priority < priority)
-                                                .Select((e, i) => i)
-                                                .Take(1)
-                                                .ToArray();
+            var insertionPoint = Find_insertion_point_before_first_element_with_lower_priority(priority);
+            Insert_element(value, priority, insertionPoint);
+        }
+
+        private int[] Find_insertion_point_before_first_element_with_lower_priority(int priority)
+        {
+            return _queue.Where(e => e.Priority < priority)
+                         .Select((e, i) => i)
+                         .Take(1)
+                         .ToArray();
+        }
+
+        private void Insert_element(T value, int priority, int[] indexOfLowerPrioElement)
+        {
             if (indexOfLowerPrioElement.Any())
                 _queue.Insert(indexOfLowerPrioElement[0], new Element(value, priority));
             else
                 _queue.Add(new Element(value, priority));
         }
+
 
         public T Dequeue()
         {
