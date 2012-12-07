@@ -71,6 +71,20 @@ namespace Systen.Collections.Generic
         #endregion
 
         #region Dequeue
+
+        [Test]
+        public void Dequeue_on_non_empty()
+        {
+            var queue = new List<PriorityQueue<string>.Element>();
+            queue.Add(new PriorityQueue<string>.Element("a", 5));
+            queue.Add(new PriorityQueue<string>.Element("b", 5));
+
+            var result = queue.First().Value;
+            queue.RemoveAt(0);
+
+            Assert.AreEqual("a", result);
+            Assert.AreEqual("b", queue[0].Value);
+        }
         #endregion
 
         #region Count
@@ -102,9 +116,9 @@ namespace Systen.Collections.Generic
             var indexOfLowerPrioElement = _queue.Where(e => e.Priority < priority)
                                                 .Select((e, i) => i)
                                                 .Take(1)
-                                                .ToList();
+                                                .ToArray();
             if (indexOfLowerPrioElement.Any())
-                _queue.Insert(indexOfLowerPrioElement.First(), new Element(value, priority));
+                _queue.Insert(indexOfLowerPrioElement[0], new Element(value, priority));
             else
                 _queue.Add(new Element(value, priority));
         }
