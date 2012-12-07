@@ -113,11 +113,11 @@ namespace Systen.Collections.Generic
         [Test]
         public void Clear_non_empty_queue()
         {
-            var queue = new List<PriorityQueue<string>.Element>();
-            queue.Add(new PriorityQueue<string>.Element("a", 1));
+            var queue = new List<PriorityQueue<string>.Element> {new PriorityQueue<string>.Element("a", 1)};
+            var sut = new PriorityQueue<string>(queue);
 
-            queue.Clear();
-            
+            sut.Clear();
+
             Assert.AreEqual(0, queue.Count());
         }
         #endregion
@@ -167,6 +167,11 @@ namespace Systen.Collections.Generic
         public int Count()
         {
             return _queue.Count();
+        }
+
+        public void Clear()
+        {
+            _queue.Clear();
         }
     }
 }
