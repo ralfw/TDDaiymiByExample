@@ -101,6 +101,16 @@ namespace Systen.Collections.Generic
             var result = queue.Count;
             Assert.AreEqual(0, result);
         }
+
+        [Test]
+        public void Count_length_of_non_empty_queue()
+        {
+            var queue = new List<PriorityQueue<string>.Element> {new PriorityQueue<string>.Element("a", 1)};
+
+            var result = queue.Count;
+
+            Assert.AreEqual(1, result);
+        }
         #endregion
 
         #region Clear
