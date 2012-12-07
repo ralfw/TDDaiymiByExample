@@ -75,23 +75,20 @@ namespace Systen.Collections.Generic
         [Test]
         public void Dequeue_on_non_empty()
         {
-            var queue = new List<PriorityQueue<string>.Element>();
-            queue.Add(new PriorityQueue<string>.Element("a", 5));
-            queue.Add(new PriorityQueue<string>.Element("b", 5));
+            var queue = new List<PriorityQueue<string>.Element>
+                            {new PriorityQueue<string>.Element("a", 5), 
+                             new PriorityQueue<string>.Element("b", 5)};
+            var sut = new PriorityQueue<string>(queue);
 
-            var result = queue.First().Value;
-            queue.RemoveAt(0);
-
-            Assert.AreEqual("a", result);
+            Assert.AreEqual("a", sut.Dequeue());
             Assert.AreEqual("b", queue[0].Value);
         }
 
         [Test]
         public void Dequeue_on_empty()
         {
-            var queue = new List<PriorityQueue<string>.Element>();
-
-            Assert.Throws<InvalidOperationException>(() => { var _ = queue.First().Value; });
+            var sut = new PriorityQueue<string>();
+            Assert.Throws<InvalidOperationException>(() => { var _ = sut.Dequeue(); });
         }
         #endregion
 
@@ -129,6 +126,13 @@ namespace Systen.Collections.Generic
                 _queue.Insert(indexOfLowerPrioElement[0], new Element(value, priority));
             else
                 _queue.Add(new Element(value, priority));
+        }
+
+        public T Dequeue()
+        {
+            var value = _queue.First().Value;
+            _queue.RemoveAt(0);
+            return value;
         }
 
         public T Peek()
