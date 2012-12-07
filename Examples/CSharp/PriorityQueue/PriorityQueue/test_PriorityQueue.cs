@@ -110,6 +110,16 @@ namespace Systen.Collections.Generic
         #endregion
 
         #region Clear
+        [Test]
+        public void Clear_non_empty_queue()
+        {
+            var queue = new List<PriorityQueue<string>.Element>();
+            queue.Add(new PriorityQueue<string>.Element("a", 1));
+
+            queue.Clear();
+            
+            Assert.AreEqual(0, queue.Count());
+        }
         #endregion
     }
 
