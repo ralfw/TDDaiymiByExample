@@ -93,23 +93,19 @@ namespace Systen.Collections.Generic
         #endregion
 
         #region Count
-
         [Test]
         public void Count_length_of_empty_queue()
         {
-            var queue = new List<PriorityQueue<string>.Element>();
-            var result = queue.Count;
-            Assert.AreEqual(0, result);
+            var sut = new PriorityQueue<string>();
+            Assert.AreEqual(0, sut.Count());
         }
 
         [Test]
         public void Count_length_of_non_empty_queue()
         {
-            var queue = new List<PriorityQueue<string>.Element> {new PriorityQueue<string>.Element("a", 1)};
-
-            var result = queue.Count;
-
-            Assert.AreEqual(1, result);
+            var sut = new PriorityQueue<string>();
+            sut.Enqueue("a", 1);
+            Assert.AreEqual(1, sut.Count());
         }
         #endregion
 
@@ -156,6 +152,11 @@ namespace Systen.Collections.Generic
         public T Peek()
         {
             return _queue[0].Value;
+        }
+
+        public int Count()
+        {
+            return _queue.Count();
         }
     }
 }
