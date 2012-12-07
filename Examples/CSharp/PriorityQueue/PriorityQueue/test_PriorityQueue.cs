@@ -93,6 +93,14 @@ namespace Systen.Collections.Generic
         #endregion
 
         #region Count
+
+        [Test]
+        public void Count_length_of_empty_queue()
+        {
+            var queue = new List<PriorityQueue<string>.Element>();
+            var result = queue.Count;
+            Assert.AreEqual(0, result);
+        }
         #endregion
 
         #region Clear
