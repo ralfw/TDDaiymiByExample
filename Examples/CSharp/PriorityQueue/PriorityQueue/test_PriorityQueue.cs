@@ -85,6 +85,14 @@ namespace Systen.Collections.Generic
             Assert.AreEqual("a", result);
             Assert.AreEqual("b", queue[0].Value);
         }
+
+        [Test]
+        public void Dequeue_on_empty()
+        {
+            var queue = new List<PriorityQueue<string>.Element>();
+
+            Assert.Throws<InvalidOperationException>(() => { var _ = queue.First().Value; });
+        }
         #endregion
 
         #region Count
