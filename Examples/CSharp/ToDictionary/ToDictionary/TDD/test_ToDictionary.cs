@@ -9,5 +9,10 @@ namespace ToDictionary.TDD
     [TestFixture]
     public class test_ToDictionary
     {
+        [Test]
+        public void Single_name_value_pair()
+        {
+            Assert.That("a=1".ToDictionary(), Is.EqualTo(new Dictionary<string,string>{{"a", "1"}}));
+        }
     }
 }
