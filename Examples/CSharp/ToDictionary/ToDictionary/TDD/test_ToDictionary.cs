@@ -20,5 +20,11 @@ namespace ToDictionary.TDD
         {
             Assert.That("a=1;b=2".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "1" }, {"b", "2"} }));
         }
+
+        [Test]
+        public void Multi_char_name()
+        {
+            Assert.That("abc=1".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "abc", "1" } }));
+        }
     }
 }
