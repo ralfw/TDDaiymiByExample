@@ -14,5 +14,11 @@ namespace ToDictionary.TDD
         {
             Assert.That("a=1".ToDictionary(), Is.EqualTo(new Dictionary<string,string>{{"a", "1"}}));
         }
+
+        [Test]
+        public void Multiple_name_value_pairs()
+        {
+            Assert.That("a=1;b=2".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "1" }, {"b", "2"} }));
+        }
     }
 }
