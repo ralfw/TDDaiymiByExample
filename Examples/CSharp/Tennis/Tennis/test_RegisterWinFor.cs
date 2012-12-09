@@ -53,9 +53,7 @@ namespace Tennis
             pointIndexOfPlayer[0]++; // 40:0
             pointIndexOfPlayer[0]++; // Game over
 
-            var score = pointIndexOfPlayer[0] >= POINT_VALUES.Length ? "Game over" : POINT_VALUES[pointIndexOfPlayer[0]];
-
-            Assert.AreEqual("Game over", score);
+            Assert.AreEqual("Game over", Build_score(pointIndexOfPlayer));
         }
 
         [Test]
@@ -65,9 +63,7 @@ namespace Tennis
 
             pointIndexOfPlayer[1]++; // 40:40
 
-            var score = pointIndexOfPlayer[0] == 3 && (pointIndexOfPlayer[0] == pointIndexOfPlayer[1]) ? "Deuce" : "?";
-
-            Assert.AreEqual("Deuce", score);
+            Assert.AreEqual("Deuce", Build_score(pointIndexOfPlayer));
         }
 
 
@@ -75,8 +71,13 @@ namespace Tennis
 
         string Build_score(int[] pointIndexOfPlayer)
         {
-            var score = string.Format("{0}:{1}", POINT_VALUES[pointIndexOfPlayer[0]], POINT_VALUES[pointIndexOfPlayer[1]]);
-            return score;
+            if (pointIndexOfPlayer[0] >= POINT_VALUES.Length || pointIndexOfPlayer[1] >= POINT_VALUES.Length)
+                return "Game over";
+            
+            if (pointIndexOfPlayer[0] == 3 && (pointIndexOfPlayer[0] == pointIndexOfPlayer[1]))
+                return "Deuce";
+
+            return string.Format("{0}:{1}", POINT_VALUES[pointIndexOfPlayer[0]], POINT_VALUES[pointIndexOfPlayer[1]]);
         }
     }
 }
