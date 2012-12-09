@@ -56,5 +56,11 @@ namespace ToDictionary.TDD
         {
             Assert.That("a==".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "=" } })); 
         }
+
+        [Test]
+        public void No_value_provided()
+        {
+            Assert.That("a".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "" } }));
+        }
     }
 }
