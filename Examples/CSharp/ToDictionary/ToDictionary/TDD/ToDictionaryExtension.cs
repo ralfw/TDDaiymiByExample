@@ -23,6 +23,7 @@ namespace ToDictionary.TDD
                     name = assignment.Substring(0, indexOfEqual);
                     value = assignment.Substring(indexOfEqual + 1);
                 }
+                if (name == "") throw new ArgumentException("Missing name in assignment.");
 
                 dict[name.Trim()] = value;
             }
