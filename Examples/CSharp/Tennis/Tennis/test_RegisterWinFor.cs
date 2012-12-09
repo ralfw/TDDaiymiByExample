@@ -43,10 +43,25 @@ namespace Tennis
             Assert.AreEqual("30:15", score);
         }
 
+        [Test]
+        public void Winning_a_game_without_deuce()
+        {
+            var pointIndexOfPlayer = new int[2];
 
-        readonly string[] POINT_VALUES = new string[]{ "0", "15", "30" };
+            pointIndexOfPlayer[0]++; // 15:0
+            pointIndexOfPlayer[0]++; // 30:0
+            pointIndexOfPlayer[0]++; // 40:0
+            pointIndexOfPlayer[0]++; // Game over
 
-        public string Build_score(int[] pointIndexOfPlayer)
+            var score = pointIndexOfPlayer[0] >= POINT_VALUES.Length ? "Game over" : POINT_VALUES[pointIndexOfPlayer[0]];
+
+            Assert.AreEqual("Game over", score);
+        }
+
+
+        readonly string[] POINT_VALUES = new string[]{ "0", "15", "30", "40"};
+
+        string Build_score(int[] pointIndexOfPlayer)
         {
             var score = string.Format("{0}:{1}", POINT_VALUES[pointIndexOfPlayer[0]], POINT_VALUES[pointIndexOfPlayer[1]]);
             return score;
