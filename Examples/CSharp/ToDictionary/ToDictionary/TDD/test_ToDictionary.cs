@@ -68,5 +68,11 @@ namespace ToDictionary.TDD
         {
             Assert.That("a=1;2".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "1" }, {"2", ""} }));
         }
+
+        [Test]
+        public void Skipping_consecutive_semicolons()
+        {
+            Assert.That("a=1;;b=2".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "1" }, { "b", "2" } }));
+        }
     }
 }
