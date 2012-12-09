@@ -86,5 +86,12 @@ namespace ToDictionary.TDD
         {
             Assert.That("".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { }));
         }
+
+        [Test]
+        public void Null_string()
+        {
+            string s = null;
+            Assert.Throws<NullReferenceException>(() => s.ToDictionary());
+        }
     }
 }
