@@ -10,6 +10,7 @@ namespace ToDictionary.TDD
             var dict = new Dictionary<string, string>();
 
             var assignments = text.Split(new[]{';'}, StringSplitOptions.RemoveEmptyEntries);
+
             foreach (var assignment in assignments)
             {
                 var name="";
@@ -23,7 +24,7 @@ namespace ToDictionary.TDD
                     name = assignment.Substring(0, indexOfEqual);
                     value = assignment.Substring(indexOfEqual + 1);
                 }
-                if (name == "") throw new ArgumentException("Missing name in assignment.");
+                if (name == "") throw new ArgumentException("Missing name for value: " + assignment);
 
                 dict[name.Trim()] = value;
             }
