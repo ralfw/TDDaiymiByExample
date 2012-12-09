@@ -80,5 +80,11 @@ namespace ToDictionary.TDD
         {
             Assert.That("a=1;a=2".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "2" } }));
         }
+
+        [Test]
+        public void Empty_string()
+        {
+            Assert.That("".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { }));
+        }
     }
 }
