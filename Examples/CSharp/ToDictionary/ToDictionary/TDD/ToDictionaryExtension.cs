@@ -11,8 +11,10 @@ namespace ToDictionary.TDD
             var assignments = text.Split(';');
             foreach (var assignment in assignments)
             {
-                var nameValue = assignment.Split('=');
-                dict.Add(nameValue[0].Trim(), nameValue[1]);
+                var indexOfEqual = assignment.IndexOf("=");
+                var name = assignment.Substring(0, indexOfEqual);
+                var value = assignment.Substring(indexOfEqual + 1);
+                dict.Add(name.Trim(), value);
             }
 
             return dict;
