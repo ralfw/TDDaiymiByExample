@@ -12,7 +12,7 @@ namespace ToDictionary.TDD
             foreach (var assignment in assignments)
             {
                 var nameValue = assignment.Split('=');
-                dict.Add(nameValue[0], nameValue[1]);
+                dict.Add(nameValue[0].Trim(), nameValue[1]);
             }
 
             return dict;
