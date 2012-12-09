@@ -12,9 +12,10 @@ namespace Tennis
         [Test]
         public void First_win()
         {
-            var scorePlayer1 = 15;
-            var scorePlayer2 = 0;
-            var score = string.Format("{0}:{1}", scorePlayer1, scorePlayer2);
+            var pointValues = new[] {"0", "15"};
+            var pointIndexPlayer1 = 1;
+            var pointIndexPlayer2 = 0;
+            var score = string.Format("{0}:{1}", pointValues[pointIndexPlayer1], pointValues[pointIndexPlayer2]);
             Assert.AreEqual("15:0", score);
         }
 
@@ -23,12 +24,12 @@ namespace Tennis
         {
             var pointValues = new[] {"0", "15", "30"};
             var pointIndexPlayer1 = 0;
-            var pointindexPlayer2 = 0;
+            var pointIndexPlayer2 = 0;
 
             pointIndexPlayer1++;
             pointIndexPlayer1++;
             
-            var score = string.Format("{0}:{1}", pointValues[pointIndexPlayer1], pointValues[pointindexPlayer2]);
+            var score = string.Format("{0}:{1}", pointValues[pointIndexPlayer1], pointValues[pointIndexPlayer2]);
             Assert.AreEqual("30:0", score);
         }
     }
