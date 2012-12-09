@@ -62,5 +62,11 @@ namespace ToDictionary.TDD
         {
             Assert.That("a".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "" } }));
         }
+
+        [Test]
+        public void Semicolon_seemingly_in_value()
+        {
+            Assert.That("a=1;2".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "1" }, {"2", ""} }));
+        }
     }
 }
