@@ -58,6 +58,18 @@ namespace Tennis
             Assert.AreEqual("Game over", score);
         }
 
+        [Test]
+        public void Entering_deuce_state()
+        {
+            var pointIndexOfPlayer = new[]{3,2}; // 40:30
+
+            pointIndexOfPlayer[1]++; // 40:40
+
+            var score = Build_score(pointIndexOfPlayer);
+
+            Assert.AreEqual("Deuce", score);
+        }
+
 
         readonly string[] POINT_VALUES = new string[]{ "0", "15", "30", "40"};
 
