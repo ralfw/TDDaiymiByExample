@@ -32,5 +32,19 @@ namespace Tennis
             var score = string.Format("{0}:{1}", pointValues[pointIndexPlayer1], pointValues[pointIndexPlayer2]);
             Assert.AreEqual("30:0", score);
         }
+
+        [Test]
+        public void Players_winning_alternately()
+        {
+            var pointValues = new[] { "0", "15", "30" };
+            var pointIndexOfPlayer = new int[2];
+
+            pointIndexOfPlayer[0]++;
+            pointIndexOfPlayer[1]++;
+            pointIndexOfPlayer[0]++;
+
+            var score = string.Format("{0}:{1}", pointValues[pointIndexOfPlayer[0]], pointValues[pointIndexOfPlayer[1]]);
+            Assert.AreEqual("30:15", score);
+        }
     }
 }
