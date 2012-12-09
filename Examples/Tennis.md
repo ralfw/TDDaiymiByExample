@@ -1,11 +1,12 @@
 # Tennis
-Implement a referee class to keep score of a tennis game. This exercise is inspired by [KataTennis](http://codingdojo.org/cgi-bin/wiki.pl?KataTennis) from the Coding Dojo Wiki.
+Implement a referee class to keep score of a tennis game. This exercise was inspired by [KataTennis](http://codingdojo.org/cgi-bin/wiki.pl?KataTennis) from the Coding Dojo Wiki.
 
 The API should look like this:
 
 	class TennisReferee {
 		TennisReferee(string player1Name, string player2Name) {...}
-		string RegisterWin(Players player) {...}
+		
+		string RegisterWinFor(Players player) {...}
 		string CurrentScore { get {...} }
 		string Winner { get {...} }
 	}
@@ -15,7 +16,7 @@ The API should look like this:
 		Player2
 	}
 
-The current score should be returned like this from _RegisterWin()_ as well as the _CurrentScrore_ property:
+The current score should be returned like this from _RegisterWinFor()_ as well as the _CurrentScrore_ property:
 
 	"15:40"
 	"Deuce"
@@ -27,9 +28,9 @@ As the winner the name of a player is returned - or the empty string as long as 
 Usage sample:
 
 	var r = new TennisReferee("Federer", "Nadal");
-	r.RegisterWin(Players.Player1);
-	r.RegisterWin(Players.Player1);
-	r.RegisterWin(Players.Player2);
+	r.RegisterWinFor(Players.Player1);
+	r.RegisterWinFor(Players.Player1);
+	r.RegisterWinFor(Players.Player2);
 	Console.WriteLine(r.CurrentScore); // "30:15"
 	...
 	Console.WriteLine(r.Winner); // "Federer"
@@ -42,7 +43,7 @@ Like described in the Kata only one game needs to be scored. The points to gain 
 	40
 	deuce
 	advantage
-	game // the game is over
+	game over
 
 Once both players gained 40 the score is deuce. Then the same player needs to win twice in a row to win the game.
 
@@ -76,8 +77,27 @@ As is evident, the diagram structure changes markedly below the Deuce state, hen
 
 #### CurrentScore
 * No wins registered
-* After some wins
+* Score after some wins
 
 #### Winner
 * Game still on
 * Game has been won
+
+#### Acceptance tests
+
+* Players: "A", "B"
+* Players winning in this order: B,B,A
+* Current Score = "30:15"
+* Players winning in this order: A,A,A
+* CurrentScore = "Game over"
+* Winner = "A"
+
+* Players: "A", "B"
+* Players winning in this order: A,B,A,A,B,B
+* CurrentScore = "Deuce"
+* Players winning in this order: A,B,B
+* CurrentScore = "Advantage B"
+* Players winning in this order: B
+* CurrentScore = "Game over"
+* Winner = "B"
+
