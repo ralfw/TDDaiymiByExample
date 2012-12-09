@@ -24,7 +24,7 @@ namespace ToDictionary.TDD
                     value = assignment.Substring(indexOfEqual + 1);
                 }
 
-                dict.Add(name.Trim(), value);
+                dict[name.Trim()] = value;
             }
 
             return dict;
