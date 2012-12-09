@@ -32,11 +32,5 @@ namespace ToDictionary.TDD
         {
             Assert.That("a=1234".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "1234" } }));
         }
-
-        [Test]
-        public void Empty_value()
-        {
-            Assert.That("a=".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "abc", "" } }));
-        }
     }
 }
