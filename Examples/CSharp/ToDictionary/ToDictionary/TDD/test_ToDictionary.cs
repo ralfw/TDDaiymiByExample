@@ -38,5 +38,11 @@ namespace ToDictionary.TDD
         {
             Assert.That("a=".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "" } }));   
         }
+
+        [Test]
+        public void Whitespace_in_name()
+        {
+            Assert.That(" a =1".ToDictionary(), Is.EqualTo(new Dictionary<string, string> { { "a", "1" } })); 
+        }
     }
 }
