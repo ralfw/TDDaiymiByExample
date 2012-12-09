@@ -6,7 +6,8 @@ namespace ToDictionary.TDD
     {
         public static Dictionary<string,string> ToDictionary(this string text)
         {
-            return new Dictionary<string, string>{{"a", "1"}};
+            var nameValue = text.Split('=');
+            return new Dictionary<string, string>{{nameValue[0], nameValue[1]}};
         } 
     }
 }
