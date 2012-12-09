@@ -65,7 +65,7 @@ namespace Tennis
 
             pointIndexOfPlayer[1]++; // 40:40
 
-            var score = Build_score(pointIndexOfPlayer);
+            var score = pointIndexOfPlayer[0] == 3 && (pointIndexOfPlayer[0] == pointIndexOfPlayer[1]) ? "Deuce" : "?";
 
             Assert.AreEqual("Deuce", score);
         }
