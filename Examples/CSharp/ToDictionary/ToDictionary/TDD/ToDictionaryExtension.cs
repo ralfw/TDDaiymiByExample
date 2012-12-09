@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ToDictionary.TDD
@@ -8,7 +9,7 @@ namespace ToDictionary.TDD
         {
             var dict = new Dictionary<string, string>();
 
-            var assignments = text.Split(';');
+            var assignments = text.Split(new[]{';'}, StringSplitOptions.RemoveEmptyEntries);
             foreach (var assignment in assignments)
             {
                 var name="";
