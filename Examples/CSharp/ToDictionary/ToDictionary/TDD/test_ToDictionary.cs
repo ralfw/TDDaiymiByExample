@@ -93,5 +93,11 @@ namespace ToDictionary.TDD
             string s = null;
             Assert.Throws<NullReferenceException>(() => s.ToDictionary());
         }
+
+        [Test]
+        public void No_name_given()
+        {
+            Assert.Throws<ArgumentException>(() => "=1".ToDictionary());
+        }
     }
 }
