@@ -9,12 +9,11 @@ namespace ToDictionary.TDD
             var dict = new Dictionary<string, string>();
 
             var assignments = text.Split(';');
-
-            var nameValue = assignments[0].Split('=');
-            dict.Add(nameValue[0], nameValue[1]);
-
-            nameValue = assignments[1].Split('=');
-            dict.Add(nameValue[0], nameValue[1]);
+            foreach (var assignment in assignments)
+            {
+                var nameValue = assignment.Split('=');
+                dict.Add(nameValue[0], nameValue[1]);
+            }
 
             return dict;
         } 
