@@ -12,38 +12,44 @@ namespace Tennis
         [Test]
         public void First_win()
         {
-            var pointValues = new[] {"0", "15"};
             var pointIndexOfPlayer = new int[] {1, 0};
 
-            var score = string.Format("{0}:{1}", pointValues[pointIndexOfPlayer[0]], pointValues[pointIndexOfPlayer[1]]);
+            var score = Build_score(pointIndexOfPlayer);
             Assert.AreEqual("15:0", score);
         }
 
         [Test]
         public void Second_win_same_player()
         {
-            var pointValues = new[] {"0", "15", "30"};
             var pointIndexOfPlayer = new int[2];
 
             pointIndexOfPlayer[0]++;
             pointIndexOfPlayer[0]++;
 
-            var score = string.Format("{0}:{1}", pointValues[pointIndexOfPlayer[0]], pointValues[pointIndexOfPlayer[1]]);
+            var score = Build_score(pointIndexOfPlayer);
             Assert.AreEqual("30:0", score);
         }
 
         [Test]
         public void Players_winning_alternately()
         {
-            var pointValues = new[] { "0", "15", "30" };
             var pointIndexOfPlayer = new int[2];
 
             pointIndexOfPlayer[0]++;
             pointIndexOfPlayer[1]++;
             pointIndexOfPlayer[0]++;
 
-            var score = string.Format("{0}:{1}", pointValues[pointIndexOfPlayer[0]], pointValues[pointIndexOfPlayer[1]]);
+            var score = Build_score(pointIndexOfPlayer);
             Assert.AreEqual("30:15", score);
+        }
+
+
+        readonly string[] POINT_VALUES = new string[]{ "0", "15", "30" };
+
+        public string Build_score(int[] pointIndexOfPlayer)
+        {
+            var score = string.Format("{0}:{1}", POINT_VALUES[pointIndexOfPlayer[0]], POINT_VALUES[pointIndexOfPlayer[1]]);
+            return score;
         }
     }
 }
