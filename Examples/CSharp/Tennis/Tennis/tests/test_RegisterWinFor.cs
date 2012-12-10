@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
-namespace Tennis
+namespace Tennis.tests
 {
     [TestFixture]
     public class test_RegisterWinFor
