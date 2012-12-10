@@ -79,12 +79,14 @@ namespace Tennis
         [Test]
         public void Winning_game_from_advantage()
         {
-            var POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage", "Game over" };
+            var POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage" };
             var pointIndexOfPlayer = new[] { 4, 3 }; // advantage A
 
             pointIndexOfPlayer[0]++;
 
-            var score = POINT_VALUES[pointIndexOfPlayer[0]];
+            var score = "";
+            if (pointIndexOfPlayer[0] >= POINT_VALUES.Length)
+                score = "Game over";
 
             Assert.AreEqual("Game over", score);   
         }
