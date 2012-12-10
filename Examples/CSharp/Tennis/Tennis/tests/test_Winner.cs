@@ -18,5 +18,15 @@ namespace Tennis.tests
                 winner = "";
             Assert.AreEqual("", winner);
         }
+
+        [Test]
+        public void Game_has_been_won()
+        {
+            var pointIndexOfPlayer = new[] {4, 2};
+            var winner = "";
+            if (pointIndexOfPlayer[0] > pointIndexOfPlayer[1])
+                winner = "A";
+            Assert.AreEqual("A", winner);
+        }
     }
 }
