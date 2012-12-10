@@ -12,72 +12,90 @@ namespace Tennis
         [Test]
         public void First_win()
         {
-            var pointIndexOfPlayer = new int[] {1, 0};
-
-            var score = Build_score(pointIndexOfPlayer);
-            Assert.AreEqual("15:0", score);
+            var sut = new Referee(new[] {1, 0});
+            Assert.AreEqual("15:0", sut.Build_score());
         }
 
         [Test]
         public void Second_win_same_player()
         {
-            var pointIndexOfPlayer = new int[2];
+            var sut = new Referee();
 
-            pointIndexOfPlayer[0]++;
-            pointIndexOfPlayer[0]++;
+            sut.RegisterWinFor(Referee.Players.Player1);
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
 
-            var score = Build_score(pointIndexOfPlayer);
             Assert.AreEqual("30:0", score);
         }
 
         [Test]
         public void Players_winning_alternately()
         {
-            var pointIndexOfPlayer = new int[2];
+            var sut = new Referee();
 
-            pointIndexOfPlayer[0]++;
-            pointIndexOfPlayer[1]++;
-            pointIndexOfPlayer[0]++;
+            sut.RegisterWinFor(Referee.Players.Player1);
+            sut.RegisterWinFor(Referee.Players.Player2);
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
 
-            var score = Build_score(pointIndexOfPlayer);
             Assert.AreEqual("30:15", score);
         }
 
         [Test]
         public void Winning_a_game_without_deuce()
         {
-            var pointIndexOfPlayer = new int[2];
+            var sut = new Referee();
 
-            pointIndexOfPlayer[0]++; // 15:0
-            pointIndexOfPlayer[0]++; // 30:0
-            pointIndexOfPlayer[0]++; // 40:0
-            pointIndexOfPlayer[0]++; // Game over
+            sut.RegisterWinFor(Referee.Players.Player1);
+            sut.RegisterWinFor(Referee.Players.Player1);
+            sut.RegisterWinFor(Referee.Players.Player1);
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
 
-            Assert.AreEqual("Game over", Build_score(pointIndexOfPlayer));
+            Assert.AreEqual("Game over", score);
         }
 
         [Test]
         public void Entering_deuce_state()
         {
-            var pointIndexOfPlayer = new[]{3,2}; // 40:30
+            var sut = new Referee(new[] {3, 2}); // 40:30
 
-            pointIndexOfPlayer[1]++; // 40:40
+            var score = sut.RegisterWinFor(Referee.Players.Player2);
 
-            Assert.AreEqual("Deuce", Build_score(pointIndexOfPlayer));
+            Assert.AreEqual("Deuce", score);
+        }
+    }
+
+
+    class Referee
+    {
+        public enum Players
+        {
+            Player1,
+            Player2
+        }
+
+        readonly string[] POINT_VALUES = new string[] { "0", "15", "30", "40" };
+        readonly int[] _pointIndexOfPlayer = new int[2];
+
+
+        internal Referee(int[] pointIndexOfPlayer) { _pointIndexOfPlayer = pointIndexOfPlayer; }
+        public Referee() {}
+
+
+        public string RegisterWinFor(Players player)
+        {
+            _pointIndexOfPlayer[(int)player]++;
+            return Build_score();
         }
 
 
-        readonly string[] POINT_VALUES = new string[]{ "0", "15", "30", "40"};
-
-        string Build_score(int[] pointIndexOfPlayer)
+        internal string Build_score()
         {
-            if (pointIndexOfPlayer[0] >= POINT_VALUES.Length || pointIndexOfPlayer[1] >= POINT_VALUES.Length)
+            if (_pointIndexOfPlayer[0] >= POINT_VALUES.Length || _pointIndexOfPlayer[1] >= POINT_VALUES.Length)
                 return "Game over";
-            
-            if (pointIndexOfPlayer[0] == 3 && (pointIndexOfPlayer[0] == pointIndexOfPlayer[1]))
+
+            if (_pointIndexOfPlayer[0] == 3 && (_pointIndexOfPlayer[0] == _pointIndexOfPlayer[1]))
                 return "Deuce";
 
-            return string.Format("{0}:{1}", POINT_VALUES[pointIndexOfPlayer[0]], POINT_VALUES[pointIndexOfPlayer[1]]);
+            return string.Format("{0}:{1}", POINT_VALUES[_pointIndexOfPlayer[0]], POINT_VALUES[_pointIndexOfPlayer[1]]);
         }
     }
 }
