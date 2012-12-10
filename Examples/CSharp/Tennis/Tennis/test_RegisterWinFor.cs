@@ -132,13 +132,23 @@ namespace Tennis
 
         internal string Build_score()
         {
-            if (_pointIndexOfPlayer[0] >= POINT_VALUES.Length || _pointIndexOfPlayer[1] >= POINT_VALUES.Length)
+            if (Is_game_over_before_deuce())
                 return "Game over";
 
-            if (_pointIndexOfPlayer[0] == 3 && (_pointIndexOfPlayer[0] == _pointIndexOfPlayer[1]))
+            if (Is_game_in_deuce_state())
                 return "Deuce";
 
             return string.Format("{0}:{1}", POINT_VALUES[_pointIndexOfPlayer[0]], POINT_VALUES[_pointIndexOfPlayer[1]]);
+        }
+
+        private bool Is_game_in_deuce_state()
+        {
+            return _pointIndexOfPlayer[0] == 3 && (_pointIndexOfPlayer[0] == _pointIndexOfPlayer[1]);
+        }
+
+        private bool Is_game_over_before_deuce()
+        {
+            return _pointIndexOfPlayer[0] >= POINT_VALUES.Length || _pointIndexOfPlayer[1] >= POINT_VALUES.Length;
         }
     }
 }
