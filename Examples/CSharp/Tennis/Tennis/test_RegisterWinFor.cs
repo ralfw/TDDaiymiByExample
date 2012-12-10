@@ -12,14 +12,14 @@ namespace Tennis
         [Test]
         public void First_win()
         {
-            var sut = new Referee(new[] {1, 0});
+            var sut = new Referee("", "", new[] {1, 0});
             Assert.AreEqual("15:0", sut.Build_score());
         }
 
         [Test]
         public void Second_win_same_player()
         {
-            var sut = new Referee();
+            var sut = new Referee("", "");
 
             sut.RegisterWinFor(Referee.Players.Player1);
             var score = sut.RegisterWinFor(Referee.Players.Player1);
@@ -30,7 +30,7 @@ namespace Tennis
         [Test]
         public void Players_winning_alternately()
         {
-            var sut = new Referee();
+            var sut = new Referee("", "");
 
             sut.RegisterWinFor(Referee.Players.Player1);
             sut.RegisterWinFor(Referee.Players.Player2);
@@ -42,7 +42,7 @@ namespace Tennis
         [Test]
         public void Winning_a_game_without_deuce()
         {
-            var sut = new Referee();
+            var sut = new Referee("", "");
 
             sut.RegisterWinFor(Referee.Players.Player1);
             sut.RegisterWinFor(Referee.Players.Player1);
@@ -55,7 +55,7 @@ namespace Tennis
         [Test]
         public void Entering_deuce_state()
         {
-            var sut = new Referee(new[] {3, 2}); // 40:30
+            var sut = new Referee("", "", new[] { 3, 2 }); // 40:30
 
             var score = sut.RegisterWinFor(Referee.Players.Player2);
 
@@ -93,7 +93,7 @@ namespace Tennis
         [Test]
         public void Winning_game_from_advantage()
         {
-            var sut = new Referee(new[] {4, 3});
+            var sut = new Referee("", "", new[] { 4, 3 });
             var score = sut.RegisterWinFor(Referee.Players.Player1);
             Assert.AreEqual("Game over", score);   
         }
@@ -102,6 +102,7 @@ namespace Tennis
 
     class Referee
     {
+
         public enum Players
         {
             Player1,
@@ -110,11 +111,19 @@ namespace Tennis
 
         readonly string[] POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage" };
         private const int INDEX_FORTY_POINTS = 3;
-        readonly int[] _pointIndexOfPlayer = new int[2];
+        private readonly int[] _pointIndexOfPlayer;
+
+        private readonly string _namePlayer1;
+        private readonly string _namePlayer2;
 
 
-        internal Referee(int[] pointIndexOfPlayer) { _pointIndexOfPlayer = pointIndexOfPlayer; }
-        public Referee() {}
+        internal Referee(string namePlayer1, string namePlayer2, int[] pointIndexOfPlayer)
+        {
+            _namePlayer1 = namePlayer1;
+            _namePlayer2 = namePlayer2;
+            _pointIndexOfPlayer = pointIndexOfPlayer;
+        }
+        public Referee(string namePlayer1, string namePlayer2) : this(namePlayer1, namePlayer2, new int[2]) {}
 
 
         public string RegisterWinFor(Players player)
