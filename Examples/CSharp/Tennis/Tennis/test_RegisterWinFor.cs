@@ -115,7 +115,8 @@ namespace Tennis
             Player2
         }
 
-        readonly string[] POINT_VALUES = new string[] { "0", "15", "30", "40" };
+        readonly string[] POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage" };
+        private const int INDEX_FORTY_POINTS = 3;
         readonly int[] _pointIndexOfPlayer = new int[2];
 
 
@@ -148,7 +149,8 @@ namespace Tennis
 
         private bool Is_game_over_before_deuce()
         {
-            return _pointIndexOfPlayer[0] >= POINT_VALUES.Length || _pointIndexOfPlayer[1] >= POINT_VALUES.Length;
+            return (POINT_VALUES[_pointIndexOfPlayer[0]] == "Advantage" && _pointIndexOfPlayer[1] < INDEX_FORTY_POINTS) ||
+                   (POINT_VALUES[_pointIndexOfPlayer[1]] == "Advantage" && _pointIndexOfPlayer[0] < INDEX_FORTY_POINTS);
         }
     }
 }
