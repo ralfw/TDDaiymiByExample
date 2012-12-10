@@ -73,21 +73,15 @@ namespace Tennis
         [Test]
         public void Losing_advantage()
         {
-            var pointIndexOfPlayer = new[] { 4, 3 }; // advantage A
-
-            pointIndexOfPlayer[0]--;
-
-            var score = "";
-            if (pointIndexOfPlayer[0] == 3 && (pointIndexOfPlayer[0] == pointIndexOfPlayer[1]))
-                score = "Deuce";
-
+            var sut = new Referee("A", "B", new[] {4, 3}); // advantage A
+            var score = sut.RegisterWinFor(Referee.Players.Player2);
             Assert.AreEqual("Deuce", score);   
         }
 
         [Test]
         public void Winning_game_from_advantage()
         {
-            var sut = new Referee("", "", new[] { 4, 3 });
+            var sut = new Referee("A", "B", new[] { 4, 3 }); // advantage A
             var score = sut.RegisterWinFor(Referee.Players.Player1);
             Assert.AreEqual("Game over", score);   
         }
@@ -121,7 +115,15 @@ namespace Tennis
 
         public string RegisterWinFor(Players player)
         {
-            _pointIndexOfPlayer[(int)player]++;
+            if (Is_in_advantage_state())
+            {
+                if (Is_advantage_player((int)player))
+                    _pointIndexOfPlayer[(int)player]++;
+                else
+                    _pointIndexOfPlayer[(int)(player == Players.Player1 ? Players.Player2 : Players.Player1)]--;
+            }
+            else
+                _pointIndexOfPlayer[(int)player]++;
             return Build_score();
         }
 
@@ -159,14 +161,19 @@ namespace Tennis
 
         private bool Is_in_advantage_state()
         {
-            return POINT_VALUES[_pointIndexOfPlayer[0]] == "Advantage" ||
-                   POINT_VALUES[_pointIndexOfPlayer[1]] == "Advantage";
+            return Is_advantage_player(0) || Is_advantage_player(1);
+        }
+
+        private bool Is_advantage_player(int indexPlayer)
+        {
+            return POINT_VALUES[_pointIndexOfPlayer[indexPlayer]] == "Advantage";
         }
 
         private string Build_advantage_score()
         {
-            return "Advantage " + (POINT_VALUES[_pointIndexOfPlayer[0]] == "Advantage" ? _namePlayer1 : _namePlayer2);
+            return "Advantage " + (Is_advantage_player(0) ? _namePlayer1 : _namePlayer2);
         }
+
 
         private string Build_non_advantage_score()
         {
