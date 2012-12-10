@@ -13,20 +13,14 @@ namespace Tennis.tests
         public void Game_still_on()
         {
             var sut = new Referee("A", "B", new[] {3, 2});
-            var winner = "?";
-            if (!sut.Is_game_over())
-                winner = "";
-            Assert.AreEqual("", winner);
+            Assert.AreEqual("", sut.Winner);
         }
 
         [Test]
         public void Game_has_been_won()
         {
-            var pointIndexOfPlayer = new[] {4, 2};
-            var winner = "";
-            if (pointIndexOfPlayer[0] > pointIndexOfPlayer[1])
-                winner = "A";
-            Assert.AreEqual("A", winner);
+            var sut = new Referee("A", "B", new[] {4, 2});
+            Assert.AreEqual("A", sut.Winner);
         }
     }
 }
