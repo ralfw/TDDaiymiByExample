@@ -61,6 +61,16 @@ namespace Tennis
 
             Assert.AreEqual("Deuce", score);
         }
+
+        [Test]
+        public void Advantage()
+        {
+            var sut = new Referee(new[] {3, 3}); // deuce
+
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
+
+            Assert.AreEqual("Advantage A", score);
+        }
     }
 
 
