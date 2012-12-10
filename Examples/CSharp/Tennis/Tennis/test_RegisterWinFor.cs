@@ -65,9 +65,13 @@ namespace Tennis
         [Test]
         public void Advantage()
         {
-            var sut = new Referee(new[] {3, 3}); // deuce
+            var POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage" };
+            var pointIndexOfPlayer = new[] {3, 3}; // deuce
+            var nameOfPlayer = new[] {"A", "B"};
 
-            var score = sut.RegisterWinFor(Referee.Players.Player1);
+            pointIndexOfPlayer[0]++;
+
+            var score = POINT_VALUES[pointIndexOfPlayer[0]] + " " + nameOfPlayer[0];
 
             Assert.AreEqual("Advantage A", score);
         }
