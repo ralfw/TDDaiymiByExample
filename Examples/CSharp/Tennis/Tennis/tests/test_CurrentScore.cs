@@ -12,17 +12,15 @@ namespace Tennis.tests
         [Test]
         public void No_wins_yet()
         {
-            var POINT_VALUES = new string[] { "Love", "15", "30", "40", "Advantage" };
-            var score = string.Format("{0}:{1}", POINT_VALUES[0], POINT_VALUES[0]);
-            Assert.AreEqual("Love:Love", score);
+            var sut = new Referee("", "");
+            Assert.AreEqual("Love:Love", sut.CurrentScore);
         }
 
         [Test]
         public void Score_after_some_wins()
         {
             var sut = new Referee("A", "B", new[] {3, 2});
-            var score = sut.Build_score();
-            Assert.AreEqual("40:30", score);
+            Assert.AreEqual("40:30", sut.CurrentScore);
         }
     }
 }

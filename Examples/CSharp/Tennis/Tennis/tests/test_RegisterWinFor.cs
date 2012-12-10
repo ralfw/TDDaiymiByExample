@@ -9,7 +9,7 @@ namespace Tennis.tests
         public void First_win()
         {
             var sut = new Referee("", "", new[] {1, 0});
-            Assert.AreEqual("15:0", sut.Build_score());
+            Assert.AreEqual("15:Love", sut.Build_score());
         }
 
         [Test]
@@ -20,7 +20,7 @@ namespace Tennis.tests
             sut.RegisterWinFor(Referee.Players.Player1);
             var score = sut.RegisterWinFor(Referee.Players.Player1);
 
-            Assert.AreEqual("30:0", score);
+            Assert.AreEqual("30:Love", score);
         }
 
         [Test]

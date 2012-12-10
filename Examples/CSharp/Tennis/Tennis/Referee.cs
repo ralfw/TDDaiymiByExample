@@ -8,7 +8,7 @@ namespace Tennis
             Player2
         }
 
-        readonly string[] POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage" };
+        readonly string[] POINT_VALUES = new string[] { "Love", "15", "30", "40", "Advantage" };
         private const int INDEX_FORTY_POINTS = 3;
         private readonly int[] _pointIndexOfPlayer;
 
@@ -23,6 +23,9 @@ namespace Tennis
             _pointIndexOfPlayer = pointIndexOfPlayer;
         }
         public Referee(string namePlayer1, string namePlayer2) : this(namePlayer1, namePlayer2, new int[2]) {}
+
+
+        public string CurrentScore { get { return Build_score(); } }
 
 
         public string RegisterWinFor(Players player)
