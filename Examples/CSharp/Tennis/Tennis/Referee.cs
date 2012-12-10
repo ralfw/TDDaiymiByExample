@@ -34,21 +34,22 @@ namespace Tennis
 
         private void Adjust_points_for_winner(Players player)
         {
-            if (Is_in_advantage_state())
-            {
-                if (Is_advantage_player((int) player))
-                    _pointIndexOfPlayer[(int) player]++;
+            if (!Is_game_over())
+                if (Is_in_advantage_state())
+                {
+                    if (Is_advantage_player((int) player))
+                        _pointIndexOfPlayer[(int) player]++;
+                    else
+                        _pointIndexOfPlayer[(int) (player == Players.Player1 ? Players.Player2 : Players.Player1)]--;
+                }
                 else
-                    _pointIndexOfPlayer[(int) (player == Players.Player1 ? Players.Player2 : Players.Player1)]--;
-            }
-            else
-                _pointIndexOfPlayer[(int) player]++;
+                    _pointIndexOfPlayer[(int) player]++;
         }
 
 
         internal string Build_score()
         {
-            if (Is_game_over_from_advantage() || Is_game_over_before_deuce())
+            if (Is_game_over())
                 return "Game over";
 
             if (Is_game_in_deuce_state())
@@ -58,6 +59,11 @@ namespace Tennis
                 return Build_advantage_score();
 
             return Build_non_advantage_score();
+        }
+
+        internal bool Is_game_over()
+        {
+            return Is_game_over_from_advantage() || Is_game_over_before_deuce();
         }
 
         private bool Is_game_over_before_deuce()

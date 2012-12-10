@@ -91,8 +91,7 @@ namespace Tennis
         {
             var sut = new Referee("A", "B", new[] {3, 2}); // 40:30
             var score = sut.RegisterWinFor(Referee.Players.Player1); // A wins the game
-            if (!sut.Is_game_over())
-                score = sut.RegisterWinFor(Referee.Players.Player2);
+            score = sut.RegisterWinFor(Referee.Players.Player2);
             Assert.AreEqual("Game over", score);
         }
     }
