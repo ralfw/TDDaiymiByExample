@@ -115,16 +115,22 @@ namespace Tennis
 
         public string RegisterWinFor(Players player)
         {
+            Adjust_points_for_winner(player);
+            return Build_score();
+        }
+
+
+        private void Adjust_points_for_winner(Players player)
+        {
             if (Is_in_advantage_state())
             {
-                if (Is_advantage_player((int)player))
-                    _pointIndexOfPlayer[(int)player]++;
+                if (Is_advantage_player((int) player))
+                    _pointIndexOfPlayer[(int) player]++;
                 else
-                    _pointIndexOfPlayer[(int)(player == Players.Player1 ? Players.Player2 : Players.Player1)]--;
+                    _pointIndexOfPlayer[(int) (player == Players.Player1 ? Players.Player2 : Players.Player1)]--;
             }
             else
-                _pointIndexOfPlayer[(int)player]++;
-            return Build_score();
+                _pointIndexOfPlayer[(int) player]++;
         }
 
 
@@ -141,7 +147,6 @@ namespace Tennis
 
             return Build_non_advantage_score();
         }
-
 
         private bool Is_game_over_before_deuce()
         {
@@ -173,7 +178,6 @@ namespace Tennis
         {
             return "Advantage " + (Is_advantage_player(0) ? _namePlayer1 : _namePlayer2);
         }
-
 
         private string Build_non_advantage_score()
         {
