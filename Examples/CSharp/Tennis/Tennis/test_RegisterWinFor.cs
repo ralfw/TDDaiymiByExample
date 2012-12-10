@@ -63,7 +63,7 @@ namespace Tennis
         }
 
         [Test]
-        public void Advantage()
+        public void Gaining_advantage()
         {
             var POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage" };
             var pointIndexOfPlayer = new[] {3, 3}; // deuce
@@ -74,14 +74,6 @@ namespace Tennis
             var score = POINT_VALUES[pointIndexOfPlayer[0]] + " " + nameOfPlayer[0];
 
             Assert.AreEqual("Advantage A", score);
-        }
-
-        [Test]
-        public void Winning_game_from_advantage()
-        {
-            var sut = new Referee(new[] {4, 3});
-            var score = sut.RegisterWinFor(Referee.Players.Player1);
-            Assert.AreEqual("Game over", score);   
         }
 
         [Test]
@@ -96,6 +88,14 @@ namespace Tennis
                 score = "Deuce";
 
             Assert.AreEqual("Deuce", score);   
+        }
+
+        [Test]
+        public void Winning_game_from_advantage()
+        {
+            var sut = new Referee(new[] {4, 3});
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
+            Assert.AreEqual("Game over", score);   
         }
     }
 
