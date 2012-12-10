@@ -65,14 +65,8 @@ namespace Tennis
         [Test]
         public void Gaining_advantage()
         {
-            var POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage" };
-            var pointIndexOfPlayer = new[] {3, 3}; // deuce
-            var nameOfPlayer = new[] {"A", "B"};
-
-            pointIndexOfPlayer[0]++;
-
-            var score = POINT_VALUES[pointIndexOfPlayer[0]] + " " + nameOfPlayer[0];
-
+            var sut = new Referee("A", "B", new[] {3, 3});
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
             Assert.AreEqual("Advantage A", score);
         }
 
@@ -102,7 +96,6 @@ namespace Tennis
 
     class Referee
     {
-
         public enum Players
         {
             Player1,
@@ -141,14 +134,12 @@ namespace Tennis
             if (Is_game_in_deuce_state())
                 return "Deuce";
 
-            return string.Format("{0}:{1}", POINT_VALUES[_pointIndexOfPlayer[0]], POINT_VALUES[_pointIndexOfPlayer[1]]);
+            if (Is_in_advantage_state())
+                return Build_advantage_score();
+
+            return Build_non_advantage_score();
         }
 
-
-        private bool Is_game_in_deuce_state()
-        {
-            return _pointIndexOfPlayer[0] == 3 && (_pointIndexOfPlayer[0] == _pointIndexOfPlayer[1]);
-        }
 
         private bool Is_game_over_before_deuce()
         {
@@ -159,6 +150,27 @@ namespace Tennis
         private bool Is_game_over_from_advantage()
         {
             return _pointIndexOfPlayer[0] >= POINT_VALUES.Length || _pointIndexOfPlayer[1] >= POINT_VALUES.Length;
+        }
+
+        private bool Is_game_in_deuce_state()
+        {
+            return _pointIndexOfPlayer[0] == 3 && (_pointIndexOfPlayer[0] == _pointIndexOfPlayer[1]);
+        }
+
+        private bool Is_in_advantage_state()
+        {
+            return POINT_VALUES[_pointIndexOfPlayer[0]] == "Advantage" ||
+                   POINT_VALUES[_pointIndexOfPlayer[1]] == "Advantage";
+        }
+
+        private string Build_advantage_score()
+        {
+            return "Advantage " + (POINT_VALUES[_pointIndexOfPlayer[0]] == "Advantage" ? _namePlayer1 : _namePlayer2);
+        }
+
+        private string Build_non_advantage_score()
+        {
+            return string.Format("{0}:{1}", POINT_VALUES[_pointIndexOfPlayer[0]], POINT_VALUES[_pointIndexOfPlayer[1]]);
         }
     }
 }
