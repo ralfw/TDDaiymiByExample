@@ -79,15 +79,8 @@ namespace Tennis
         [Test]
         public void Winning_game_from_advantage()
         {
-            var POINT_VALUES = new string[] { "0", "15", "30", "40", "Advantage" };
-            var pointIndexOfPlayer = new[] { 4, 3 }; // advantage A
-
-            pointIndexOfPlayer[0]++;
-
-            var score = "";
-            if (pointIndexOfPlayer[0] >= POINT_VALUES.Length)
-                score = "Game over";
-
+            var sut = new Referee(new[] {4, 3});
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
             Assert.AreEqual("Game over", score);   
         }
 
@@ -133,7 +126,7 @@ namespace Tennis
 
         internal string Build_score()
         {
-            if (Is_game_over_before_deuce())
+            if (Is_game_over_from_advantage() || Is_game_over_before_deuce())
                 return "Game over";
 
             if (Is_game_in_deuce_state())
@@ -141,6 +134,7 @@ namespace Tennis
 
             return string.Format("{0}:{1}", POINT_VALUES[_pointIndexOfPlayer[0]], POINT_VALUES[_pointIndexOfPlayer[1]]);
         }
+
 
         private bool Is_game_in_deuce_state()
         {
@@ -151,6 +145,11 @@ namespace Tennis
         {
             return (POINT_VALUES[_pointIndexOfPlayer[0]] == "Advantage" && _pointIndexOfPlayer[1] < INDEX_FORTY_POINTS) ||
                    (POINT_VALUES[_pointIndexOfPlayer[1]] == "Advantage" && _pointIndexOfPlayer[0] < INDEX_FORTY_POINTS);
+        }
+
+        private bool Is_game_over_from_advantage()
+        {
+            return _pointIndexOfPlayer[0] >= POINT_VALUES.Length || _pointIndexOfPlayer[1] >= POINT_VALUES.Length;
         }
     }
 }
