@@ -87,7 +87,7 @@ As is evident, the diagram structure changes markedly below the Deuce state, hen
 
 * Players: "A", "B"
 * Players winning in this order: B,B,A
-* Current Score = "30:15"
+* Current Score = "15:30"
 * Players winning in this order: A,A,A
 * CurrentScore = "Game over"
 * Winner = "A"

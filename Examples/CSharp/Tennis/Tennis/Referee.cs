@@ -27,12 +27,14 @@ namespace Tennis
 
         public string CurrentScore { get { return Build_score(); } }
 
+
         public string Winner {get
         {
             if (Is_game_over())
                 return _pointIndexOfPlayer[0] > _pointIndexOfPlayer[1] ? _namePlayer1 : _namePlayer2;
             return "";
         }}
+
 
         public string RegisterWinFor(Players player)
         {
