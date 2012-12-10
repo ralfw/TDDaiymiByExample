@@ -88,6 +88,20 @@ namespace Tennis
 
             Assert.AreEqual("Game over", score);   
         }
+
+        [Test]
+        public void Losing_advantage()
+        {
+            var pointIndexOfPlayer = new[] { 4, 3 }; // advantage A
+
+            pointIndexOfPlayer[0]--;
+
+            var score = "";
+            if (pointIndexOfPlayer[0] == 3 && (pointIndexOfPlayer[0] == pointIndexOfPlayer[1]))
+                score = "Deuce";
+
+            Assert.AreEqual("Deuce", score);   
+        }
     }
 
 
