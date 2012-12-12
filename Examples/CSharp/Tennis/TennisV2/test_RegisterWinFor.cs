@@ -60,7 +60,7 @@ namespace TennisV2
         }
 
 
-        private readonly string[] _labels = new[] { "Love", "15" };
+        private readonly string[] _labels = new[] { "Love", "15", "30", "40" };
         readonly int[] _playerWins = new int[2];
 
 
