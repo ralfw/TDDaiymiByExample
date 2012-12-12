@@ -44,12 +44,8 @@ namespace TennisV2
         [Test]
         public void Game_enters_Deuce()
         {
-            var playerWins = new[] {3, 2};
-            var sut = new Referee(playerWins);
-            sut.Count_win_for(1);
-            var score = "40:40";
-            if (playerWins[0] == playerWins[1] && playerWins[0] >= 3)
-                score = "Deuce";
+            var sut = new Referee(new[] {3, 2});
+            var score = sut.RegisterWinFor(Referee.Players.Player2);
             Assert.AreEqual("Deuce", score);
         }
     }
@@ -88,6 +84,9 @@ namespace TennisV2
         {
             if (Is_game_over())
                 return "Game over";
+
+            if (_playerWins[0] == _playerWins[1] && _playerWins[0] >= 3)
+                return "Deuce";
 
             return string.Format("{0}:{1}", _labels[_playerWins[0]], _labels[_playerWins[1]]);
         }
