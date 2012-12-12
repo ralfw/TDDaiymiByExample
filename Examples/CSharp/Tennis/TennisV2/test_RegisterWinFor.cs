@@ -52,8 +52,13 @@ namespace TennisV2
         [Test]
         public void Advantage_is_gained()
         {
-            var sut = new Referee(new[] {3, 3});
-            var score = sut.RegisterWinFor(Referee.Players.Player1);
+            var playerWins = new[] {3, 3};
+            var sut = new Referee(playerWins);
+            sut.Count_win_for(0);
+            var score = "?:40";
+            const int leadingPlayer = 0;
+            if (Math.Abs(playerWins[0] - playerWins[1]) == 1 && playerWins[leadingPlayer] > 3)
+                score = "Advantage A";
             Assert.AreEqual("Advantage A", score);
         }
     }
