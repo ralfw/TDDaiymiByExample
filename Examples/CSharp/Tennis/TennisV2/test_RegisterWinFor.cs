@@ -77,10 +77,8 @@ namespace TennisV2
         public void Register_wins_after_game_over_does_not_change_score()
         {
             var sut = new Referee(new string[2], new[] { 6, 4 });
-            var score = "Game over";
-            if (!sut.Is_game_over())
-                score = sut.RegisterWinFor(Referee.Players.Player2);
-            Assert.AreEqual("Game over", score);            
+            var score = sut.RegisterWinFor(Referee.Players.Player2);
+            Assert.AreEqual("Game over", score);
         }
     }
 
@@ -110,7 +108,8 @@ namespace TennisV2
 
         public string RegisterWinFor(Players player)
         {
-            Count_win_for((int)player);
+            if (!Is_game_over())
+                Count_win_for((int)player);
             return Score_wins();
         }
 
