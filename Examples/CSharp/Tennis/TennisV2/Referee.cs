@@ -25,13 +25,15 @@ namespace TennisV2
         public Referee(string namePlayer1, string namePlayer2) : this(new[]{namePlayer1, namePlayer2}, new int[2]) {}
 
 
+        public string CurrentScore { get { return Score_wins(); } }
+
+
         public string RegisterWinFor(Players player)
         {
             if (!Is_game_over())
                 Count_win_for((int)player);
             return Score_wins();
         }
-
 
         internal void Count_win_for(int player)
         {
