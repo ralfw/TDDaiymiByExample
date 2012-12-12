@@ -54,11 +54,12 @@ namespace TennisV2
         {
             var playerWins = new[] {3, 3};
             var sut = new Referee(playerWins);
+            var score = "Deuce";
             sut.Count_win_for(0);
-            var score = "?:40";
             const int leadingPlayer = 0;
+            var playerNames = new[]{"A", "B"};
             if (Math.Abs(playerWins[0] - playerWins[1]) == 1 && playerWins[leadingPlayer] > 3)
-                score = "Advantage A";
+                score = "Advantage " + playerNames[leadingPlayer];
             Assert.AreEqual("Advantage A", score);
         }
     }
