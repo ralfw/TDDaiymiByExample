@@ -44,8 +44,12 @@ namespace TennisV2
         [Test]
         public void Game_enters_Deuce()
         {
-            var sut = new Referee(new[] {3, 2});
-            var score = sut.RegisterWinFor(Referee.Players.Player2);
+            var playerWins = new[] {3, 2};
+            var sut = new Referee(playerWins);
+            sut.Count_win_for(1);
+            var score = "40:40";
+            if (playerWins[0] == playerWins[1] && playerWins[0] >= 3)
+                score = "Deuce";
             Assert.AreEqual("Deuce", score);
         }
     }
