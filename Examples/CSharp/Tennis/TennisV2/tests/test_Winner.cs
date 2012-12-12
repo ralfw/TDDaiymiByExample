@@ -22,10 +22,12 @@ namespace TennisV2.tests
         [Test]
         public void Game_is_over()
         {
-            var sut = new Referee(new[] {"A", "B"}, new[] {4, 2});
+            var playerWins = new[] {4, 2};
+            var playerNames = new[] {"A", "B"};
+            var sut = new Referee(playerNames, playerWins);
             var winner = "";
             if (sut.Is_game_over())
-                winner = "And the winner is...";
+                winner = playerNames[sut.Leading_player()];
             Assert.AreEqual("A", winner);
         }
     }
