@@ -85,7 +85,7 @@ namespace TennisV2
             if (Is_game_over())
                 return "Game over";
 
-            if (_playerWins[0] == _playerWins[1] && _playerWins[0] >= 3)
+            if (Is_deuce())
                 return "Deuce";
 
             return string.Format("{0}:{1}", _labels[_playerWins[0]], _labels[_playerWins[1]]);
@@ -95,6 +95,11 @@ namespace TennisV2
         {
             return Math.Abs(_playerWins[0] - _playerWins[1]) >= 2 && 
                    Math.Max(_playerWins[0], _playerWins[1]) > 3;
+        }
+
+        private bool Is_deuce()
+        {
+            return _playerWins[0] == _playerWins[1] && _playerWins[0] >= 3;
         }
     }
 }
