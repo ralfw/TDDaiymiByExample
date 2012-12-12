@@ -74,10 +74,16 @@ namespace TennisV2
 
         internal string Score_wins()
         {
-            if (Math.Abs(_playerWins[0] - _playerWins[1]) >= 2 && Math.Max(_playerWins[0], _playerWins[1]) > 3)
+            if (Is_game_over())
                 return "Game over";
 
             return string.Format("{0}:{1}", _labels[_playerWins[0]], _labels[_playerWins[1]]);
+        }
+
+        private bool Is_game_over()
+        {
+            return Math.Abs(_playerWins[0] - _playerWins[1]) >= 2 && 
+                   Math.Max(_playerWins[0], _playerWins[1]) > 3;
         }
     }
 }
