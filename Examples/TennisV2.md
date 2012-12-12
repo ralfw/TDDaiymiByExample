@@ -70,7 +70,7 @@ Here´s a table of counts and their scores:
 
 Scores are the result of the following "calculations":
 
-* Game over: |p0-p1| == 2 && Max(p0,p1) > 3
+* Game over: |p0-p1| >= 2 && Max(p0,p1) > 3
 * Advantage: |p0-p1| == 1 && Max(p0,p1) > 3
 * Deuce: p0 == p1 && p0 < 3
 
