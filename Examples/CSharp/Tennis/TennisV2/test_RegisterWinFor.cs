@@ -40,6 +40,14 @@ namespace TennisV2
             var score = sut.RegisterWinFor(Referee.Players.Player1);
             Assert.AreEqual("Game over", score);
         }
+
+        [Test]
+        public void Game_enters_Deuce()
+        {
+            var sut = new Referee(new[] {3, 2});
+            var score = sut.RegisterWinFor(Referee.Players.Player2);
+            Assert.AreEqual("Deuce", score);
+        }
     }
 
 
