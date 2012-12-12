@@ -18,5 +18,15 @@ namespace TennisV2
             var score = string.Format("{0}:{1}", labels[player0Wins], labels[0]);
             Assert.AreEqual("15:Love", score);
         }
+
+        [Test]
+        public void Player1_wins_ball()
+        {
+            var labels = new[] { "Love", "15" };
+            var player1Wins = 0;
+            player1Wins++;
+            var score = string.Format("{0}:{1}", labels[0], labels[player1Wins]);
+            Assert.AreEqual("Love:15", score);            
+        }
     }
 }
