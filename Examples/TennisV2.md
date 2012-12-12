@@ -72,7 +72,7 @@ Scores are the result of the following "calculations":
 
 * Game over: |p0-p1| >= 2 && Max(p0,p1) > 3
 * Advantage: |p0-p1| == 1 && Max(p0,p1) > 3
-* Deuce: p0 == p1 && p0 < 3
+* Deuce: p0 == p1 && p0 >= 3
 
 Which player has won or has the advantage is determined by whose count is higher. He´s called the __leader__.
 
