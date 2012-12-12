@@ -12,47 +12,59 @@ namespace TennisV2
         [Test]
         public void Player0_wins_ball()
         {
-            _playerWins = new int[2];
-            Count_wins(0);
-            var score = Score_wins();
+            var sut = new Referee();
+            sut.Count_wins(0);
+            var score = sut.Score_wins();
             Assert.AreEqual("15:Love", score);
         }
 
         [Test]
         public void Player1_wins_ball()
         {
-            _playerWins = new int[2];
-            Count_wins(1);
-            var score = Score_wins();
+            var sut = new Referee();
+            sut.Count_wins(1);
+            var score = sut.Score_wins();
             Assert.AreEqual("Love:15", score);            
         }
 
         [Test]
         public void Initial_score()
         {
-            _playerWins = new int[2];
-            var score = Score_wins();
+            var sut = new Referee();
+            var score = sut.Score_wins();
             Assert.AreEqual("Love:Love", score);
         }
 
         [Test]
         public void Game_over_without_deuce()
         {
-            _playerWins = new[] {3, 2};
-            Count_wins(0);
-            var score = Score_wins();
+            var sut = new Referee(new[] {3, 2});
+            sut.Count_wins(0);
+            var score = sut.Score_wins();
             Assert.AreEqual("Game over", score);
         }
 
 
-        int[] _playerWins = new int[2];
-        void Count_wins(int player)
+
+    }
+
+
+    public class Referee
+    {
+        private readonly string[] _labels = new[] { "Love", "15" };
+        readonly int[] _playerWins = new int[2];
+
+
+        internal Referee(int[] playerWins) { _playerWins = playerWins; }
+        public Referee() : this(new int[2]) {}
+
+
+        internal void Count_wins(int player)
         {
             _playerWins[player]++;
         }
 
-        private string[] _labels = new[] {"Love", "15"};
-        string Score_wins()
+        internal string Score_wins()
         {
             if (Math.Abs(_playerWins[0] - _playerWins[1]) >= 2 && Math.Max(_playerWins[0], _playerWins[1]) > 3)
                 return "Game over";
