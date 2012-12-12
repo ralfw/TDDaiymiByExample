@@ -64,6 +64,14 @@ namespace TennisV2
             var score = sut.RegisterWinFor(Referee.Players.Player2);
             Assert.AreEqual("Deuce", score);
         }
+
+        [Test]
+        public void Game_over_after_advantage()
+        {
+            var sut = new Referee(new string[2], new[] {5, 4});
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
+            Assert.AreEqual("Game over", score);
+        }
     }
 
 
