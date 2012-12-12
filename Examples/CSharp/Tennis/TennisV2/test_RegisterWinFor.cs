@@ -13,8 +13,7 @@ namespace TennisV2
         public void Player0_wins_ball()
         {
             var sut = new Referee();
-            sut.Count_wins(0);
-            var score = sut.Score_wins();
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
             Assert.AreEqual("15:Love", score);
         }
 
@@ -22,8 +21,7 @@ namespace TennisV2
         public void Player1_wins_ball()
         {
             var sut = new Referee();
-            sut.Count_wins(1);
-            var score = sut.Score_wins();
+            var score = sut.RegisterWinFor(Referee.Players.Player2);
             Assert.AreEqual("Love:15", score);            
         }
 
@@ -39,18 +37,21 @@ namespace TennisV2
         public void Game_over_without_deuce()
         {
             var sut = new Referee(new[] {3, 2});
-            sut.Count_wins(0);
-            var score = sut.Score_wins();
+            var score = sut.RegisterWinFor(Referee.Players.Player1);
             Assert.AreEqual("Game over", score);
         }
-
-
-
     }
 
 
     public class Referee
     {
+        public enum Players
+        {
+            Player1,
+            Player2
+        }
+
+
         private readonly string[] _labels = new[] { "Love", "15" };
         readonly int[] _playerWins = new int[2];
 
@@ -59,7 +60,14 @@ namespace TennisV2
         public Referee() : this(new int[2]) {}
 
 
-        internal void Count_wins(int player)
+        public string RegisterWinFor(Players player)
+        {
+            Count_win_for((int)player);
+            return Score_wins();
+        }
+
+
+        internal void Count_win_for(int player)
         {
             _playerWins[player]++;
         }
