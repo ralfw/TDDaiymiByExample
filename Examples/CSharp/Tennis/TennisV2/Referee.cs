@@ -27,6 +27,8 @@ namespace TennisV2
 
         public string CurrentScore { get { return Score_wins(); } }
 
+        public string Winner {get { return Is_game_over() ? _playerNames[Leading_player()] : ""; }}
+
 
         public string RegisterWinFor(Players player)
         {
@@ -66,7 +68,7 @@ namespace TennisV2
             return Math.Abs(_playerWins[0] - _playerWins[1]) == 1 && _playerWins[Leading_player()] > INDEX_FORTY_POINTS;
         }
 
-        private int Leading_player()
+        internal int Leading_player()
         {
             return _playerWins[0] > _playerWins[1] ? 0 : 1;
         }
