@@ -48,36 +48,50 @@ Like described in the Kata only one game needs to be scored. The points to gain 
 Once both players gained 40 the score is deuce. Then the same player needs to win twice in a row to win the game.
 
 ## Design
-The difficult part about the referee class is counting the score. There are two phases to it:
+How does scoring work? The input is a player who just won a ball - and the output is a score like "40:15". What happens in between, what´s the transformation?
 
-1. Counting until (or without) deuce
-2. Counting after deuce
+There needs to be some kind of accumulation of wins. That´s the state _RegisterWinFor()_ needs to update:
 
-This is clearly illustrated by the following finite state diagram:
+![](images/tennis_registerwinfor.png)
 
-![](images/tennis_fsd.jpg "Tennis Scoring Finite State Diagram")
+So tennis scoring seems to consists of two operations:
 
-The scores are the states and the numbers next to the lines are the events triggering a transition.
+* __counting__: pure accumulation of wins or counting points; that´s what happens with the input. Otherwise the score cannot be "calculated"; it needs more data than just the current winner of a ball.
+* __score keeping__: transforming these points into a score (e.g. deuce or game over); that´s what happens with the accumulation to produce the output.
 
-As is evident, the diagram structure changes markedly below the Deuce state, hence the two phases for scoring.
+Counting should be simple: a counter for each player holds the number of wins. Scoring then interprets these counts and their combination.
+
+Here´s a table of counts and their scores:
+
+![](images/tennis_counting.jpg)
+
+* p0, p1: Players
+* G0, G1: Game over, player _i_ wins
+
+Scores are the result of the following "calculations":
+
+* Game over: |p0-p1| == 2 && Max(p0,p1) > 3
+* Advantage: |p0-p1| == 1 && Max(p0,p1) > 3
+* Deuce: p0 == p1 && p0 < 3
+
+Which player has won or has the advantage is determined by whose count is higher. He´s called the __leader__.
 
 ## Test Cases
 #### RegisterWin
-* First win
-* Second win same player
-* Players winning alternately
-* Winning a game without deuce
+* p0 wins ball
+* p1 wins ball
 
-* Entering deuce state
-* Advantage
-* Winning game from advantage
-* Losing advantage
+* Initial score
+* Game over without Deuce
+* Game enters Deuce
+* Advantage is gained
+* Advantage is lost - back to Deuce
+* Game over after advantage
 
 * Registering wins after game has been won does not change score
 
 #### CurrentScore
-* No wins registered
-* Score after some wins
+* Property reflects result of last _RegisterWinFor()_ call
 
 #### Winner
 * Game still on
@@ -87,7 +101,7 @@ As is evident, the diagram structure changes markedly below the Deuce state, hen
 
 * Players: "A", "B"
 * Players winning in this order: B,B,A
-* Current Score = "30:15"
+* Current Score = "15:30"
 * Players winning in this order: A,A,A
 * CurrentScore = "Game over"
 * Winner = "A"
@@ -100,3 +114,4 @@ As is evident, the diagram structure changes markedly below the Deuce state, hen
 * Players winning in this order: B
 * CurrentScore = "Game over"
 * Winner = "B"
+
