@@ -12,43 +12,52 @@ namespace TennisV2
         [Test]
         public void Player0_wins_ball()
         {
-            var labels = new[] {"Love", "15"};
-            var player0Wins = 0;
-            player0Wins++;
-            var score = string.Format("{0}:{1}", labels[player0Wins], labels[0]);
+            _playerWins = new int[2];
+            Count_wins(0);
+            var score = Score_wins();
             Assert.AreEqual("15:Love", score);
         }
 
         [Test]
         public void Player1_wins_ball()
         {
-            var labels = new[] { "Love", "15" };
-            var player1Wins = 0;
-            player1Wins++;
-            var score = string.Format("{0}:{1}", labels[0], labels[player1Wins]);
+            _playerWins = new int[2];
+            Count_wins(1);
+            var score = Score_wins();
             Assert.AreEqual("Love:15", score);            
         }
 
         [Test]
         public void Initial_score()
         {
-            var labels = new[] { "Love", "15" };
-            var score = string.Format("{0}:{1}", labels[0], labels[0]);
+            _playerWins = new int[2];
+            var score = Score_wins();
             Assert.AreEqual("Love:Love", score);
         }
 
         [Test]
         public void Game_over_without_deuce()
         {
-            var player0Wins = 3; // 40
-            var player1Wins = 2; // 30
-            var score = "40:30";
-            player0Wins++; // winning the ball wins the game
-            
-            if (Math.Abs(player0Wins - player1Wins) >= 2 && Math.Max(player0Wins, player1Wins) > 3)
-                score = "Game over";
-
+            _playerWins = new[] {3, 2};
+            Count_wins(0);
+            var score = Score_wins();
             Assert.AreEqual("Game over", score);
+        }
+
+
+        int[] _playerWins = new int[2];
+        void Count_wins(int player)
+        {
+            _playerWins[player]++;
+        }
+
+        private string[] _labels = new[] {"Love", "15"};
+        string Score_wins()
+        {
+            if (Math.Abs(_playerWins[0] - _playerWins[1]) >= 2 && Math.Max(_playerWins[0], _playerWins[1]) > 3)
+                return "Game over";
+
+            return string.Format("{0}:{1}", _labels[_playerWins[0]], _labels[_playerWins[1]]);
         }
     }
 }
