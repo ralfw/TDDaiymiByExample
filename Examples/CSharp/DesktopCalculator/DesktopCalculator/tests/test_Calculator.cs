@@ -39,5 +39,16 @@ namespace DesktopCalculator.tests
 
             return sut.Calculate(3, "=");
         }
+
+        [Test]
+        public void Equal_resets_previous_data()
+        {
+            var sut = new Calculator();
+            sut.Calculate(2, "+");
+            sut.Calculate(3, "=");
+
+            Assert.AreEqual(4, sut.Calculate(4, "*"));
+            Assert.AreEqual(8, sut.Calculate(2, "="));
+        }
     }
 }
