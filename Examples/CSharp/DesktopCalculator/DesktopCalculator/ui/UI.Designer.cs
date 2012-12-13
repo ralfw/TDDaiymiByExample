@@ -1,4 +1,4 @@
-﻿namespace DesktopCalculator
+﻿namespace DesktopCalculator.ui
 {
     partial class UI
     {

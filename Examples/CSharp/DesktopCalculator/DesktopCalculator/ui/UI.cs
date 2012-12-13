@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using DesktopCalculator.tests;
+using DesktopCalculator.domain;
 
-namespace DesktopCalculator
+namespace DesktopCalculator.ui
 {
     public partial class UI : Form
     {
@@ -42,7 +36,8 @@ namespace DesktopCalculator
             statError.Text = "";
             try
             {
-                _calc.Calculate(int.Parse(txtNumber.Text), op);
+                var result = _calc.Calculate(int.Parse(txtNumber.Text), op);
+                txtNumber.Text = result.ToString();
             }
             catch (DivideByZeroException)
             {

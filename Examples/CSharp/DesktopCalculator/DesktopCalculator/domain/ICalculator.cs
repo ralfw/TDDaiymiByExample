@@ -1,4 +1,4 @@
-namespace DesktopCalculator
+namespace DesktopCalculator.domain
 {
     public interface ICalculator
     {

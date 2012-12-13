@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DesktopCalculator.domain;
+using DesktopCalculator.ui;
 
 namespace DesktopCalculator
 {
@@ -15,7 +17,7 @@ namespace DesktopCalculator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI(null));
+            Application.Run(new UI(new Calculator()));
         }
     }
 }
