@@ -13,19 +13,28 @@ namespace DesktopCalculator.tests
         public void Happy_day_Nth_op_build_on_previous()
         {
             const int previousResult = 2;
-            Func<int, int> previousOp = i => previousResult + i;
-            const int currentNumber = 3;
-            var result = previousOp(currentNumber);
+            _previousOp = i =>  previousResult + i;
+            var result = Calculate(3);
             Assert.AreEqual(5, result);
         }
 
         [Test]
         public void First_op_returns_current_number()
         {
-            Func<int, int> previousOp = i => 0 + i;
-            const int currentNumber = 2;
-            var result = previousOp(currentNumber);
+            _previousOp = i => 0 + i;
+            var result = Calculate(2);
             Assert.AreEqual(2, result);
+        }
+
+
+        private Func<int, int> _previousOp = i => 0 + 1; 
+        int Calculate(int currentNumber)
+        {
+            var result = _previousOp(currentNumber);
+
+            _previousOp = i => result + i;
+
+            return result;
         }
     }
 }
