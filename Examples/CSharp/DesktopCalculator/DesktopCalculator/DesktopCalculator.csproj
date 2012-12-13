@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="domain\Calculator.cs" />
     <Compile Include="domain\ICalculator.cs" />
+    <Compile Include="tests\test_Calculator.cs" />
     <Compile Include="tests\test_UI.cs" />
     <Compile Include="ui\UI.cs">
       <SubType>Form</SubType>

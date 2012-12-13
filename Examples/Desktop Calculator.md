@@ -59,8 +59,8 @@ In fact calculating the result means to apply the _previous_ operator to the _pr
 
 #### Domain logic
 
+* Happy day: Nth op builds on previous data
 * First op results in current number
-* Second op builds on previous data
 * Check ops
 * Equal resets previous data
 * Division by zero throws an exception
