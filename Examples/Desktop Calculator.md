@@ -31,11 +31,44 @@ Clearly there are two concerns on the table:
 
 Each should be represented by its own functional units (i.e. class).
 
-There seem to be two ways of connecting them: by making one depending on the other, e.g. the UI uses a domain object as a service, or by keeping them independent.
+There seem to be two ways of connecting them: by making one depending on the other, e.g. the UI _uses_ a domain object as a service, or by keeping them independent, i.e. neither knows of the other.
 
+![](images/calculator_designalternatives.png)
 
+Since dependencies make code harder to change and test, the latter approach seems prudent. However the first approach is more common. To keep the exercise simple it seems prudent to take the more common road.
+
+That means, only one explicit interface is needed:
+
+	interface ICalculator {
+		int Calculate(int number, string operator);
+	}
+	
+Whenever an operator is triggert by the user (mouse click, shortcut key), the UI bundles up the current number from the text box with the operator and passes it to _Calculate()_ to receive a result.
+
+The input to calculation is (number, operator), the output is a single number - which cannot be derived from just the input. So there needs to be some state with which to combine the input.
+
+![](images/calculator_state.png)
+
+In fact calculating the result means to apply the _previous_ operator to the _previous result_ and the number from the input. The result as well as the _current_ operator then will become the state of the calculator for the next request.
+
+	new result = previous op(previous result, current number)
+	previous result = new result
+	previous op = op
 
 ## Test Cases
+
+#### Domain logic
+
+* First op results in current number
+* Second op builds on previous data
+* Check ops
+* Equal resets previous data
+* Division by zero throws an exception
+
+#### UI
+
+* Happy day use of domain logic
+* Exception from domain logic is caught and displayed appropriately
 
 #### Acceptance tests
 
