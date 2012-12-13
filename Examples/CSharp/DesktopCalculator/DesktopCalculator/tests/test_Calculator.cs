@@ -26,5 +26,18 @@ namespace DesktopCalculator.tests
             var result = sut.Calculate(2, "+");
             Assert.AreEqual(2, result);
         }
+
+        [TestCase("+", Result = 15)]
+        [TestCase("-", Result = 9)]
+        [TestCase("*", Result = 36)]
+        [TestCase("/", Result = 4)]
+        public int Check_ops(string op)
+        {
+            var sut = new Calculator();
+
+            sut._previousOp = i => 12 + i;
+
+            return sut.Calculate(3, "=");
+        }
     }
 }
