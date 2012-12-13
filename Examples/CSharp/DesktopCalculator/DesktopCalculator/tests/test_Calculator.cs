@@ -35,7 +35,21 @@ namespace DesktopCalculator.tests
         {
             var sut = new Calculator();
 
-            sut._previousOp = i => 12 + i;
+            switch(op)
+            {
+                case "+":
+                    sut._previousOp = i => 12 + i;
+                    break;
+                case "-":
+                    sut._previousOp = i => 12 - i;
+                    break;
+                case "*":
+                    sut._previousOp = i => 12 * i;
+                    break;
+                case "/":
+                    sut._previousOp = i => 12 / i;
+                    break;
+            }
 
             return sut.Calculate(3, "=");
         }
