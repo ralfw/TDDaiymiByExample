@@ -35,23 +35,27 @@ namespace DesktopCalculator.tests
         {
             var sut = new Calculator();
 
-            switch(op)
-            {
-                case "+":
-                    sut._previousOp = i => 12 + i;
-                    break;
-                case "-":
-                    sut._previousOp = i => 12 - i;
-                    break;
-                case "*":
-                    sut._previousOp = i => 12 * i;
-                    break;
-                case "/":
-                    sut._previousOp = i => 12 / i;
-                    break;
-            }
+            sut._previousOp = Remember_op(op, 12);
 
             return sut.Calculate(3, "=");
         }
+
+
+        Func<int,int> Remember_op(string op, int result)
+        {
+            switch (op)
+            {
+                case "+":
+                    return i => result + i;
+                case "-":
+                    return i => result - i;
+                case "*":
+                    return i => result * i;
+                case "/":
+                    return i => result / i;
+                default:
+                    throw new NotImplementedException();
+            }
+        } 
     }
 }

@@ -7,7 +7,7 @@ namespace DesktopCalculator.domain
 {
     class Calculator : ICalculator
     {
-        private Func<int, int> _previousOp = i => 0 + i;
+        internal Func<int, int> _previousOp = i => 0 + i;
 
         public int Calculate(int currentNumber, string op)
         {
