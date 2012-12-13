@@ -50,5 +50,13 @@ namespace DesktopCalculator.tests
             Assert.AreEqual(4, sut.Calculate(4, "*"));
             Assert.AreEqual(8, sut.Calculate(2, "="));
         }
+
+        [Test]
+        public void Division_by_zero_throws_exception()
+        {
+            var sut = new Calculator();
+            sut.Calculate(2, "/");
+            Assert.Throws<DivideByZeroException>(() => sut.Calculate(0, "="));
+        }
     }
 }
