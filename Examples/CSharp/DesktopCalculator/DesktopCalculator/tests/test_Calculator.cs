@@ -18,5 +18,14 @@ namespace DesktopCalculator.tests
             var result = previousOp(currentNumber);
             Assert.AreEqual(5, result);
         }
+
+        [Test]
+        public void First_op_returns_current_number()
+        {
+            Func<int, int> previousOp = i => 0 + i;
+            const int currentNumber = 2;
+            var result = previousOp(currentNumber);
+            Assert.AreEqual(2, result);
+        }
     }
 }
