@@ -64,11 +64,15 @@ In fact calculating the result means to apply the _previous_ operator to the _pr
 * Check ops
 * Equal resets previous data
 * Division by zero throws an exception
+* Division by zero does not alter calculator state
 
 #### UI
 
 * Happy day use of domain logic
 * Exception from domain logic is caught and displayed appropriately
+
+* Ops accessible by shortcut key
+* Cursor back in textbox with number selected upon result delivery
 
 #### Acceptance tests
 
