@@ -47,29 +47,29 @@ namespace DesktopCalculator.tests
         {
             _number = 0;
             Number = 23;
-            var numberHasBeenSet = true;
-            if (numberHasBeenSet)
-            {
-                _number = int.Parse("9");
-                numberHasBeenSet = false;
-            }
-            else
-                Add_digit("9");
-            var result = Number;
+            var result = Add_digit("9");
             Assert.AreEqual(9, result);
         }
 
         private int _number;
+        private bool _numberHasBeenSet;
         int Add_digit(string digit)
         {
-            _number = 10*_number + int.Parse(digit);
+            var d = int.Parse(digit);
+            if (_numberHasBeenSet)
+            {
+                _number = d;
+                _numberHasBeenSet = false;
+            }
+            else
+                _number = 10 * _number + d;
             return _number;
         }
 
         int Number
         {
             get { return _number; }
-            set { _number = value; }
+            set { _number = value; _numberHasBeenSet = true; }
         }
     }
 }
