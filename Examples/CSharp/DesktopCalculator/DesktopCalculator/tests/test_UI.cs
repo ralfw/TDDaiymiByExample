@@ -25,17 +25,9 @@ namespace DesktopCalculator.tests
 
     class MockApplication : IApplication
     {
-        public int Calculate(int number, string op)
-        {
-            Console.WriteLine("Calculate({0}, {1})", number, op);
-
-            if (number == 0) throw new DivideByZeroException();
-
-            return DateTime.Now.Second;
-        }
-
         public int Assemble_number(string digit)
         {
+            Console.WriteLine("Digit: {0}", digit);
             return int.Parse(digit)*10;
         }
 
