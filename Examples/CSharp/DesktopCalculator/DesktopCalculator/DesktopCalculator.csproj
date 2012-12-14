@@ -49,8 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="domain\Application.cs" />
     <Compile Include="domain\Calculator.cs" />
+    <Compile Include="domain\IApplication.cs" />
     <Compile Include="domain\ICalculator.cs" />
+    <Compile Include="domain\INumberAssembler.cs" />
+    <Compile Include="domain\NumberAssembler.cs" />
     <Compile Include="tests\test_Acceptance.cs" />
     <Compile Include="tests\test_Calculator.cs" />
     <Compile Include="tests\test_UI.cs" />

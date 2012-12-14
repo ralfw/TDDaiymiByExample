@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DesktopCalculator.domain;
 using DesktopCalculator.ui;
+using Application = System.Windows.Forms.Application;
 
 namespace DesktopCalculator
 {
@@ -17,7 +18,7 @@ namespace DesktopCalculator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI(new Calculator()));
+            Application.Run(new UI(new domain.Application(new NumberAssembler(), new Calculator())));
         }
     }
 }

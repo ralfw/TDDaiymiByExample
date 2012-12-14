@@ -32,7 +32,7 @@ The interfaces for the two new functional units:
 	}
 	
 	interface INumberAssembler {
-		int Assemble_number(string digit);
+		int Add_digit(string digit);
 		int Number {get; set;}
 	}
 

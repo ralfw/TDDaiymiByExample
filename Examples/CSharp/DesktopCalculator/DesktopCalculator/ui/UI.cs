@@ -6,15 +6,20 @@ namespace DesktopCalculator.ui
 {
     public partial class UI : Form
     {
-        private readonly ICalculator _calc;
+        private readonly IApplication _app;
 
         
-        public UI(ICalculator calc)
+        internal UI(IApplication app)
         {
-            _calc = calc;
+            _app = app;
             InitializeComponent();
         }
 
+
+        private void btnDigit_click(object sender, EventArgs e)
+        {
+            txtNumber.Text = _app.Assemble_number(((Button) sender).Text).ToString();
+        }
 
         private void btnOp_Click(object sender, EventArgs e)
         {
@@ -36,16 +41,13 @@ namespace DesktopCalculator.ui
             statError.Text = "";
             try
             {
-                var result = _calc.Calculate(int.Parse(txtNumber.Text), op);
-                txtNumber.Text = result.ToString();
+                txtNumber.Text = _app.Calculate(op).ToString();
             }
             catch (DivideByZeroException)
             {
                 statError.Text = "Division by zero!";
             }
-
-            txtNumber.Focus();
-            txtNumber.SelectAll();
         }
+
     }
 }
