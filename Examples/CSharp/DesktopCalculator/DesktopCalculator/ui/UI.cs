@@ -18,23 +18,35 @@ namespace DesktopCalculator.ui
 
         private void btnDigit_click(object sender, EventArgs e)
         {
-            txtNumber.Text = _app.Assemble_number(((Button) sender).Text).ToString();
+            Assemble_digit(((Button) sender).Text);
         }
+
 
         private void btnOp_Click(object sender, EventArgs e)
         {
             Calculate(((Button)sender).Text);
         }
 
-
         private void UI_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ("+-*/=".IndexOf(e.KeyChar) < 0) return;
-
-            e.Handled = true;
-            Calculate(e.KeyChar.ToString());
+            if ("+-*/=".IndexOf(e.KeyChar) >= 0)
+            {
+                e.Handled = true;
+                Calculate(e.KeyChar.ToString());
+            }
+            
+            if ("0123456789".IndexOf(e.KeyChar) >= 0)
+            {
+                e.Handled = true;
+                Assemble_digit(e.KeyChar.ToString());
+            }
         }
 
+
+        private void Assemble_digit(string digit)
+        {
+            txtNumber.Text = _app.Assemble_number(digit).ToString();
+        }
 
         private void Calculate(string op)
         {
