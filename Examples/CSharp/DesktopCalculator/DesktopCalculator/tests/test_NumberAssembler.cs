@@ -33,6 +33,12 @@ namespace DesktopCalculator.tests
             Assert.AreEqual(2, _number);
         }
 
+        [Test]
+        public void Set_number_and_read_it()
+        {
+            _number = 23;
+            Assert.AreEqual(23, _number);
+        }
 
         private int _number;
         int Add_digit(string digit)
