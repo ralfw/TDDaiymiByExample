@@ -16,5 +16,14 @@ namespace DesktopCalculator.tests
             var result = int.Parse(digit);
             Assert.AreEqual(2, result);
         }
+
+        [Test]
+        public void Next_digit_is_added_to_number()
+        {
+            var result = 2;
+            const string secondDigit = "3";
+            result = 10*result + int.Parse(secondDigit);
+            Assert.AreEqual(23, result);
+        }
     }
 }

@@ -41,7 +41,7 @@ The interfaces for the two new functional units:
 ##### NumberAssembler
 
 * First digit is returned as number
-* Second digit is added to number
+* Next digit is added to number
 * Read number
 * Set number and read it
 * Set number and send a digit
