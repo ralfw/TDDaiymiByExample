@@ -57,6 +57,7 @@
     <Compile Include="domain\NumberAssembler.cs" />
     <Compile Include="tests\test_Acceptance.cs" />
     <Compile Include="tests\test_Calculator.cs" />
+    <Compile Include="tests\test_NumberAssembler.cs" />
     <Compile Include="tests\test_UI.cs" />
     <Compile Include="ui\UI.cs">
       <SubType>Form</SubType>
