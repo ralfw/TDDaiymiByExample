@@ -12,18 +12,24 @@ namespace DesktopCalculator.tests
         [Test]
         public void First_digit_is_returned_as_number()
         {
-            const string digit = "2";
-            var result = int.Parse(digit);
+            _number = 0;
+            var result = Add_digit("2"); 
             Assert.AreEqual(2, result);
         }
 
         [Test]
         public void Next_digit_is_added_to_number()
         {
-            var result = 2;
-            const string secondDigit = "3";
-            result = 10*result + int.Parse(secondDigit);
+            _number = 2;
+            var result = Add_digit("3");
             Assert.AreEqual(23, result);
+        }
+
+        private int _number;
+        int Add_digit(string digit)
+        {
+            _number = 10*_number + int.Parse(digit);
+            return _number;
         }
     }
 }
