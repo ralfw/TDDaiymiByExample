@@ -61,11 +61,11 @@ The interfaces for the two new functional units:
 * * = 54
 * 4 = 4
 * 0 = 40
-* = = 2180
-* + = 2180
+* = = 2160
+* + = 2160
 * 2 = 2
 * 0 = 20
-* = = 2200
+* = = 2180
 
 # Desktop Calculator - Iteration 1
 Implement a simple desktop calculator with the following user interface:
