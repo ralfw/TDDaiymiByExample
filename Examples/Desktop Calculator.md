@@ -1,4 +1,18 @@
-# Desktop Calculator
+# Desktop Calculator - Iteration 2
+Change the Desktop Calculator from iteration 1 so that the number is entered not by typing into a textbox, but by pressing a key for each digit.
+
+![](images/desktop_calculator_ui_sketch_iteration_2.jpg)
+
+Of course selecting a digit key does not need to be done with a mouse; pressing the respective keyboard key should work too.
+
+Other than that the application should stay the same.
+
+## Design
+
+
+
+
+# Desktop Calculator - Iteration 1
 Implement a simple desktop calculator with the following user interface:
 
 ![](images/desktop_calculator_ui_sketch.jpg)
