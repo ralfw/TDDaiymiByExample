@@ -42,6 +42,23 @@ namespace DesktopCalculator.tests
             Assert.AreEqual(23, result);
         }
 
+        [Test]
+        public void Set_number_and_send_a_digit()
+        {
+            _number = 0;
+            Number = 23;
+            var numberHasBeenSet = true;
+            if (numberHasBeenSet)
+            {
+                _number = int.Parse("9");
+                numberHasBeenSet = false;
+            }
+            else
+                Add_digit("9");
+            var result = Number;
+            Assert.AreEqual(9, result);
+        }
+
         private int _number;
         int Add_digit(string digit)
         {
