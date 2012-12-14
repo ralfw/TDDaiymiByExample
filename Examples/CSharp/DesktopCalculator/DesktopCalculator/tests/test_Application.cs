@@ -14,7 +14,8 @@ namespace DesktopCalculator.tests
         public void Add_digit_to_number()
         {
             var mna = new MockNumberAssembler();
-            Assert.AreEqual(2, mna.Add_digit("23"));
+            var sut = new Application(mna, null);
+            Assert.AreEqual(2, sut.Assemble_number("23"));
             Assert.AreEqual("23", mna._Digits);
         }
 
@@ -23,10 +24,10 @@ namespace DesktopCalculator.tests
         {
             var mna = new MockNumberAssembler();
             var mc = new MockCalculator();
+            var sut = new Application(mna, mc);
 
-            mna._Number = 99;
-            var result = mc.Calculate(42, "+");
-            mna._Number = result;
+            mna._Number = 42;
+            Assert.AreEqual(420, sut.Calculate("+"));
             Assert.AreEqual(420, mna.Number);
         }
 

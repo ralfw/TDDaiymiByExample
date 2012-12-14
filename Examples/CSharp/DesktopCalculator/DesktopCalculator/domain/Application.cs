@@ -24,7 +24,9 @@ namespace DesktopCalculator.domain
 
         public int Calculate(string op)
         {
-            return _calculator.Calculate(_numberAssembler.Number, op);
+            var result = _calculator.Calculate(_numberAssembler.Number, op);
+            _numberAssembler.Number = result;
+            return _numberAssembler.Number;
         }
     }
 }
