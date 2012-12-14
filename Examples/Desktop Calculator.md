@@ -8,8 +8,48 @@ Of course selecting a digit key does not need to be done with a mouse; pressing 
 Other than that the application should stay the same.
 
 ## Design
+Compared to the previous solution now the number gets assembled digit by digit. It exists as some state behind the scenes. So when pressing an operator only the operator is fired.
 
+Keeping the current interface of the calculator domain logic seems prudent. It´s an aspect which does not change just because the number is entered in a different way.
 
+So assembling the number is an aspect of its own. But how to connect both aspects? Should one depend on the other? Should the user interface integrate both?
+
+Some integration functionality seems to be in order. Integration is yet another aspect.
+
+What happens to the assembled number when an operator is executed? When the next digit is entered, the number is reset to it. But if the next operator is chosen without inputting a digit, the current result should be returned as the current number.
+
+That means, after each operator the number assembler needs to be set to the result and internally take note to reset itself upon the next digit.
+
+The new application design then would look like this:
+
+![](images/calculator_design_iteration2.png)
+
+The interfaces for the two new functional units:
+
+	interface IApplication {
+		int Assemble_number(string digit);
+		int Calculate(string operator);
+	}
+	
+	interface INumberAssembler {
+		int Assemble_number(string digit);
+		int Number {get; set;}
+	}
+
+## Tests
+
+##### NumberAssembler
+
+* First digit is returned as number
+* Second digit is added to number
+* Read number
+* Set number and read it
+* Set number and send a digit
+
+#### Application
+
+* Add a digit to the number
+* Execute an operator
 
 
 # Desktop Calculator - Iteration 1
