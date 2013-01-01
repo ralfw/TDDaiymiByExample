@@ -59,10 +59,28 @@ Since the output (Index) cannot be produced from the input (path) alone, there n
 	
 But how should this interface look like? That´s not clear from the overall problem statement at least. It will need to evolve through the tests.
 
+But still that´s not all. An Index so far is only a data structure. How is it written to the standard output stream of the program? How is the path read from the command line and passed to the Indexer?
+
+There is another aspect to the application, the UI or environmental aspect, which also needs to be captured in an interface:
+
+	interface IConsole {
+		void Run(string[] args);
+	}
+	
+An implementation of this interface calls the Indexer which in turn calls an IDocuments implementation. Whatever needs to be done with the environment is confined to the IConsole implementation, whatever is concerned with document access is encapsulated in an IDocuments impementation, and an IIndexer implementation is solely concerned with the domain logic of extracting words from documents and building an index from them.
+
+Sounds like a 3-layer application:
+
+	Console -> Indexer -> Documents
+	
+_With A -> B meaning A depending on/using B._
+
 ## Implementation
 Instead of implementing just all aspects a stepwise approach is chosen.
 
-### Iteration 1
+### Iteration 0 - Walking skeleton
+
+### Iteration 1 (Focus: IIndexer)
 * No files at all. Work on a single text doc in memory.
 * No stop words
 
@@ -76,12 +94,16 @@ Instead of implementing just all aspects a stepwise approach is chosen.
 * Several in-mem docs
 * No stop words
 
-### Iteration 3
+### Iteration 3 (Focus: IDocuments)
 * No subfolders
 * Just a single text file
 * No stop words
 
-### Iteration 4
+### Iteration 4 (Focus: IConsole)
+* Read path from command line
+* Output index to console
+
+### Iteration 4 (Focus: IDocuments)
 * No subfolders
 * Multiple text files
 * No stop words
@@ -90,9 +112,7 @@ Instead of implementing just all aspects a stepwise approach is chosen.
 * Subfolders on several levels
 * No stop words
 
-### Iteration 6
+### Iteration 6 (Focus: IIndexer)
 * Stop words
 
 ## Test Cases
-
-
