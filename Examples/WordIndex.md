@@ -1,5 +1,5 @@
 # Word Index
-Write a program to compile an index of words in text documents. Initially the documents are text files in a folder hierarchy.
+Write a program to compile an index of words from text documents. The documents are text files in a file system folder hierarchy - at least initially.
 
 The program will be started with a root folder given on the command line:
 
@@ -35,6 +35,7 @@ There seem to be at least the following distinct aspects to a solution:
   * Don´t index stop words
 * Getting docs from files (data access/files)
 * Finding doc files (data access/subfolders)
+* Writing the index to the standard output
 
 The overall functionality triggered by starting the program can be captured by an interface like this:
 
@@ -59,7 +60,7 @@ Since the output (Index) cannot be produced from the input (path) alone, there n
 	
 But how should this interface look like? That´s not clear from the overall problem statement at least. It will need to evolve through the tests.
 
-But still that´s not all. An Index so far is only a data structure. How is it written to the standard output stream of the program? How is the path read from the command line and passed to the Indexer?
+And there is more: An Index so far is only a data structure. How is it written to the standard output stream of the program? How is the path read from the command line and passed to the Indexer?
 
 There is another aspect to the application, the UI or environmental aspect, which also needs to be captured in an interface:
 
@@ -67,13 +68,15 @@ There is another aspect to the application, the UI or environmental aspect, whic
 		void Run(string[] args);
 	}
 	
-An implementation of this interface calls the Indexer which in turn calls an IDocuments implementation. Whatever needs to be done with the environment is confined to the IConsole implementation, whatever is concerned with document access is encapsulated in an IDocuments impementation, and an IIndexer implementation is solely concerned with the domain logic of extracting words from documents and building an index from them.
+An implementation of this interface calls the Indexer which in turn calls an IDocuments implementation.
+
+Whatever needs to be done with the environment is confined to the IConsole implementation, whatever is concerned with document access is encapsulated in an IDocuments impementation, and an IIndexer implementation is solely concerned with the domain logic of extracting words from documents and building an index from them.
 
 Sounds like a 3-layer application:
 
 	Console -> Indexer -> Documents
 	
-_With A -> B meaning A depending on/using B._
+_With A -> B meaning A depending on/using/calling B._
 
 ## Implementation
 Instead of implementing just all aspects a stepwise approach is chosen.
