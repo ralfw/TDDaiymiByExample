@@ -100,18 +100,53 @@ namespace RPNDesktopCalculator.tests
             Assert.AreEqual(1, result.Item2);
         }
 
+
+        [Test]
+        public void Calculate_factorial_for_current_number()
+        {
+            var sut = new RPNCalculator();
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Calculate(new Tuple<string, int>("!", 3));
+
+            Assert.AreEqual(new int[] {}, result.Item1);
+            Assert.AreEqual(6, result.Item2);
+        }
     }
 
 
     public class RPNCalculator
     {
         private readonly Stack<int> _stack;
+        private readonly Dictionary<string, Func<Stack<int>, int>> _operations; 
 
         public RPNCalculator() : this(new Stack<int>()) {}
         public RPNCalculator(Stack<int> stack)
         {
             _stack = stack;
+
+            _operations = new Dictionary<string, Func<Stack<int>, int>>
+            {
+                {
+                    "+", 
+                    operands =>
+                    {
+                        var right = operands.Pop();
+                        var left = operands.Pop();
+                        return left + right;
+                    }},
+                {
+                    "!",
+                    operands =>
+                    {
+                        var operand = operands.Pop();
+                        return Factorial(operand);
+                    }
+                }
+            };
         }
+
 
         public void Push(int number)
         {
@@ -122,9 +157,9 @@ namespace RPNDesktopCalculator.tests
 
         public void Calculate(Tuple<string, int> calcRequest)
         {
-            var leftOperand = _stack.Pop();
-            var rightOperand = calcRequest.Item2;
-            var result = leftOperand + rightOperand;
+            _stack.Push(calcRequest.Item2);
+            var operation = _operations[calcRequest.Item1];
+            var result = operation(_stack);
             Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), result));
         }
 
@@ -136,5 +171,12 @@ namespace RPNDesktopCalculator.tests
 
 
         public event Action<Tuple<IEnumerable<int>, int>> Result;
+
+
+        int Factorial(int n)
+        {
+            if (n <= 1) return 1;
+            return Factorial(n - 1)*n;
+        }
     }
 }
