@@ -37,6 +37,38 @@ namespace RPNDesktopCalculator.tests
             Assert.AreEqual(new[] { 1, 2 }, result.Item1);
             Assert.AreEqual(2, result.Item2);
         }
+
+
+        [Test]
+        public void Add_number_to_single_value_stack()
+        {
+            var initialStack = new Stack<int>();
+            initialStack.Push(2);
+            var sut = new RPNCalculator(initialStack);
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Calculate(new Tuple<string, int>("+", 3));
+
+            Assert.AreEqual(new int[]{}, result.Item1);
+            Assert.AreEqual(5, result.Item2);
+        }
+
+        [Test]
+        public void Add_number_to_stack_top()
+        {
+            var initialStack = new Stack<int>();
+            initialStack.Push(2);
+            initialStack.Push(3);
+            var sut = new RPNCalculator(initialStack);
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Calculate(new Tuple<string, int>("+", 4));
+
+            Assert.AreEqual(new[]{2}, result.Item1);
+            Assert.AreEqual(7, result.Item2);
+        }
     }
 
 
@@ -54,6 +86,15 @@ namespace RPNDesktopCalculator.tests
         {
             _stack.Push(number);
             Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), number));
+        }
+
+
+        public void Calculate(Tuple<string, int> calcRequest)
+        {
+            var leftOperand = _stack.Pop();
+            var rightOperand = calcRequest.Item2;
+            var result = leftOperand + rightOperand;
+            Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), result));
         }
 
 
