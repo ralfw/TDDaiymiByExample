@@ -34,6 +34,7 @@ namespace RPNDesktopCalculator
             this.txtCurrentNumber = new System.Windows.Forms.TextBox();
             this.btnEnter = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnDrop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstStack
@@ -79,12 +80,24 @@ namespace RPNDesktopCalculator
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnOp_Click);
             // 
+            // btnDrop
+            // 
+            this.btnDrop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDrop.Location = new System.Drawing.Point(120, 186);
+            this.btnDrop.Name = "btnDrop";
+            this.btnDrop.Size = new System.Drawing.Size(75, 32);
+            this.btnDrop.TabIndex = 4;
+            this.btnDrop.Text = "Drop";
+            this.btnDrop.UseVisualStyleBackColor = true;
+            this.btnDrop.Click += new System.EventHandler(this.btnDrop_Click);
+            // 
             // UI
             // 
             this.AcceptButton = this.btnEnter;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(211, 191);
+            this.ClientSize = new System.Drawing.Size(211, 224);
+            this.Controls.Add(this.btnDrop);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnEnter);
             this.Controls.Add(this.txtCurrentNumber);
@@ -104,6 +117,7 @@ namespace RPNDesktopCalculator
         private TextBox txtCurrentNumber;
         private Button btnEnter;
         private Button btnAdd;
+        private Button btnDrop;
     }
 }
 

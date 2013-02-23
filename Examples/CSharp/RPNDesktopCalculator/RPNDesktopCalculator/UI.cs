@@ -53,6 +53,14 @@ namespace RPNDesktopCalculator
         public event Action<Tuple<string, int>> Operator_pressed;
 
 
+        private void btnDrop_Click(object sender, EventArgs e)
+        {
+            Number_dropped();
+        }
+
+        public event Action Number_dropped;
+
+
         public void Display_result(Tuple<IEnumerable<int>, int> result)
         {
             lstStack.Items.Clear();
@@ -62,5 +70,6 @@ namespace RPNDesktopCalculator
             txtCurrentNumber.Focus();
             txtCurrentNumber.SelectAll();
         }
+
     }
 }

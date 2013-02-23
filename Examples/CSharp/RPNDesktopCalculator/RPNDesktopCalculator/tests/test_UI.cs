@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using NUnit.Framework;
 
 namespace RPNDesktopCalculator.tests
@@ -35,6 +36,16 @@ namespace RPNDesktopCalculator.tests
                     var opnum = (int) req.Item1[0];
                     ui.Display_result(new Tuple<IEnumerable<int>, int>(new[]{opnum}, req.Item2));
                 };
+
+            ui.ShowDialog();
+        }
+
+        [Test, Explicit]
+        public void Drop_number()
+        {
+            var ui = new UI();
+
+            ui.Number_dropped += () => MessageBox.Show("Drop number!");
 
             ui.ShowDialog();
         }
