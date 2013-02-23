@@ -67,6 +67,8 @@ The operator pressed is passed into the calculator as a string. That string is u
 
 By keeping the operations in a list they can easily be extended.
 
+"Execute operation" is special in that the functional unit in the flow states it´s working on an input (here: operation). That makes implementation easier.
+
 ## Tests
 
 ![](images/rpn_calc_test_push.jpeg)
