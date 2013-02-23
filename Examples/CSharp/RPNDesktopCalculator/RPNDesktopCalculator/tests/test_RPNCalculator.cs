@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -69,35 +68,70 @@ namespace RPNDesktopCalculator.tests
             Assert.AreEqual(new[]{2}, result.Item1);
             Assert.AreEqual(7, result.Item2);
         }
-    }
 
 
-    public class RPNCalculator
-    {
-        private readonly Stack<int> _stack;
-
-        public RPNCalculator() : this(new Stack<int>()) {}
-        public RPNCalculator(Stack<int> stack)
+        [Test]
+        public void Drop_number_from_empty_stack()
         {
-            _stack = stack;
+            var initialStack = new Stack<int>();
+            var sut = new RPNCalculator(initialStack);
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Drop();
+
+            Assert.AreEqual(new int[] { }, result.Item1);
+            Assert.AreEqual(0, result.Item2);
         }
 
-        public void Push(int number)
+        [Test]
+        public void Drop_number_from_non_empty_stack()
         {
-            _stack.Push(number);
-            Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), number));
+            var initialStack = new Stack<int>();
+            initialStack.Push(1);
+            var sut = new RPNCalculator(initialStack);
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Drop();
+
+            Assert.AreEqual(new int[] { }, result.Item1);
+            Assert.AreEqual(1, result.Item2);
         }
 
 
-        public void Calculate(Tuple<string, int> calcRequest)
+        [Test]
+        public void Calculate_factorial_for_current_number()
         {
-            var leftOperand = _stack.Pop();
-            var rightOperand = calcRequest.Item2;
-            var result = leftOperand + rightOperand;
-            Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), result));
+            var sut = new RPNCalculator();
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Calculate(new Tuple<string, int>("!", 3));
+
+            Assert.AreEqual(new int[] {}, result.Item1);
+            Assert.AreEqual(6, result.Item2);
         }
 
 
-        public event Action<Tuple<IEnumerable<int>, int>> Result;
+        [TestCase(12, "-", 5, 7)]
+        [TestCase(12, "*", 2, 24)]
+        [TestCase(12, "/", 3, 4)]
+        public void More_basic_operations(int leftOperand, 
+                                            string op, 
+                                            int number, 
+                                            int calcResult)
+        {
+            var initialStack = new Stack<int>();
+            initialStack.Push(leftOperand);
+            var sut = new RPNCalculator(initialStack);
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Calculate(new Tuple<string, int>(op, number));
+
+            Assert.AreEqual(new int[] { }, result.Item1);
+            Assert.AreEqual(calcResult, result.Item2);   
+        }
     }
 }

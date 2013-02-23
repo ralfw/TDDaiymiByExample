@@ -1,5 +1,5 @@
 # RPN Desktop Calculator
-Idea is taken from [Brett Schuchert´s video series](http://vimeo.com/album/205252)
+Idea taken from [Brett Schuchert´s video series](http://vimeo.com/album/205252)
 
 A RPN calculator works on math formulas in postfix notation rather than infix:
 
@@ -50,7 +50,7 @@ The UI grows increment by increment like this:
 ### Architecture
 The solution consists of 1 process.
 
-Winforms is used for the GUI.
+Winforms is used for the GUI portal.
 
 #### Model
 It´s seems naturally to model the calculation logic as an actor instead of an action. It´s clearly stateful and can be thought of to represent a hardware device:

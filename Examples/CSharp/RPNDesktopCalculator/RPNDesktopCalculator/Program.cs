@@ -23,6 +23,7 @@ namespace RPNDesktopCalculator
 
             ui.Number_entered += rpn.Push;
             ui.Operator_pressed += rpn.Calculate;
+            ui.Number_dropped += rpn.Drop;
             rpn.Result += ui.Display_result;
 
             Application.Run(ui);
