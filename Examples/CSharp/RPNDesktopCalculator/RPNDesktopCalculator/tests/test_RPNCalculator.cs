@@ -15,7 +15,9 @@ namespace RPNDesktopCalculator.tests
         {
             var sut = new RPNCalculator();
 
-            var result = sut.Push(1);
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Push(1);
 
             Assert.AreEqual(new[]{1}, result.Item1);
             Assert.AreEqual(1, result.Item2);
@@ -28,7 +30,9 @@ namespace RPNDesktopCalculator.tests
             initialStack.Push(1);
             var sut = new RPNCalculator(initialStack);
 
-            var result = sut.Push(2);
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Push(2);
 
             Assert.AreEqual(new[] { 1, 2 }, result.Item1);
             Assert.AreEqual(2, result.Item2);
@@ -46,10 +50,13 @@ namespace RPNDesktopCalculator.tests
             _stack = stack;
         }
 
-        public Tuple<IEnumerable<int>, int>  Push(int number)
+        public void Push(int number)
         {
             _stack.Push(number);
-            return new Tuple<IEnumerable<int>, int>(_stack.Reverse(), number);
+            Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), number));
         }
+
+
+        public event Action<Tuple<IEnumerable<int>, int>> Result;
     }
 }
