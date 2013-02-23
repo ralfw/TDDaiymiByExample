@@ -24,5 +24,19 @@ namespace RPNDesktopCalculator.tests
 
             ui.ShowDialog();
         }
+
+        [Test, Explicit]
+        public void Press_operator()
+        {
+            var ui = new UI();
+
+            ui.Operator_pressed += req =>
+                {
+                    var opnum = (int) req.Item1[0];
+                    ui.Display_result(new Tuple<IEnumerable<int>, int>(new[]{opnum}, req.Item2));
+                };
+
+            ui.ShowDialog();
+        }
     }
 }

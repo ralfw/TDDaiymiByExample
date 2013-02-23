@@ -33,6 +33,7 @@ namespace RPNDesktopCalculator
             this.lstStack = new System.Windows.Forms.ListBox();
             this.txtCurrentNumber = new System.Windows.Forms.TextBox();
             this.btnEnter = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstStack
@@ -67,12 +68,24 @@ namespace RPNDesktopCalculator
             this.btnEnter.UseVisualStyleBackColor = true;
             this.btnEnter.Click += new System.EventHandler(this.btnEnter_Click);
             // 
+            // btnAdd
+            // 
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(12, 147);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(36, 32);
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "+";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnOp_Click);
+            // 
             // UI
             // 
             this.AcceptButton = this.btnEnter;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(211, 191);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnEnter);
             this.Controls.Add(this.txtCurrentNumber);
             this.Controls.Add(this.lstStack);
@@ -90,6 +103,7 @@ namespace RPNDesktopCalculator
         private System.Windows.Forms.ListBox lstStack;
         private TextBox txtCurrentNumber;
         private Button btnEnter;
+        private Button btnAdd;
     }
 }
 

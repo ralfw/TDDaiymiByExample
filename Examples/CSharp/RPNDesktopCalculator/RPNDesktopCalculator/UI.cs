@@ -44,6 +44,15 @@ namespace RPNDesktopCalculator
         public event Action<int> Number_entered;
 
 
+        private void btnOp_Click(object sender, EventArgs e)
+        {
+            Operator_pressed(new Tuple<string, int>(((Button)sender).Text, 
+                             int.Parse(txtCurrentNumber.Text)));
+        }
+
+        public event Action<Tuple<string, int>> Operator_pressed;
+
+
         public void Display_result(Tuple<IEnumerable<int>, int> result)
         {
             lstStack.Items.Clear();
@@ -53,6 +62,5 @@ namespace RPNDesktopCalculator
             txtCurrentNumber.Focus();
             txtCurrentNumber.SelectAll();
         }
-
     }
 }
