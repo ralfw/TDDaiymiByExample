@@ -69,6 +69,37 @@ namespace RPNDesktopCalculator.tests
             Assert.AreEqual(new[]{2}, result.Item1);
             Assert.AreEqual(7, result.Item2);
         }
+
+
+        [Test]
+        public void Drop_number_from_empty_stack()
+        {
+            var initialStack = new Stack<int>();
+            var sut = new RPNCalculator(initialStack);
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Drop();
+
+            Assert.AreEqual(new int[] { }, result.Item1);
+            Assert.AreEqual(0, result.Item2);
+        }
+
+        [Test]
+        public void Drop_number_from_non_empty_stack()
+        {
+            var initialStack = new Stack<int>();
+            initialStack.Push(1);
+            var sut = new RPNCalculator(initialStack);
+
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Drop();
+
+            Assert.AreEqual(new int[] { }, result.Item1);
+            Assert.AreEqual(1, result.Item2);
+        }
+
     }
 
 
@@ -95,6 +126,12 @@ namespace RPNDesktopCalculator.tests
             var rightOperand = calcRequest.Item2;
             var result = leftOperand + rightOperand;
             Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), result));
+        }
+
+        public void Drop()
+        {
+            var number = _stack.Any() ? _stack.Pop() : 0;
+            Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), number));
         }
 
 
