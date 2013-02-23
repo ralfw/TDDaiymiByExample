@@ -52,6 +52,8 @@ The solution consists of 1 process.
 
 Winforms is used for the GUI portal.
 
+![](images/rpn_calc_sysenv.jpeg)
+
 #### Model
 It´s seems naturally to model the calculation logic as an actor instead of an action. It´s clearly stateful and can be thought of to represent a hardware device:
 
