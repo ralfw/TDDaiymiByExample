@@ -27,5 +27,49 @@ To quickly gain feedback, development should move forward in small increments:
 1. !
 
 ## Design
+### Domain Analysis
+The solution consists of 1 application with 1 dialog.
+
+The dialog consists of 2 + n interactions:
+
+1. ENTER: Push current number on stack
+2. DROP: Pop number from stack and make it the current number
+3. Operator: Combine current number with stack and make the result the current number
+
+![](images/rpn_calc_explained.jpeg)
+
+#### UI
+The UI grows increment by increment like this:
+
+![](images/rpn_calc_1.jpeg)
+![](images/rpn_calc_2.jpeg)
+![](images/rpn_calc_3.jpeg)
+![](images/rpn_calc_4.jpeg)
+![](images/rpn_calc_final.jpeg)
+
+### Architecture
+The solution consists of 1 process.
+
+Winforms is used for the GUI.
+
+#### Model
+It´s seems naturally to model the calculation logic as an actor instead of an action. It´s clearly stateful and can be thought of to represent a hardware device:
+
+![](images/rpn_calc_flow.jpeg)
+
+The actions .Push and .Drop are trivial. They only modify the internal stack. But how does calculation work?
+
+![](images/rpn_calc_flow_calc.jpeg)
+
+The operator pressed is passed into the calculator as a string. That string is used to look up the actual operation. Operations are kept in a list and are of the form Func<Stack,int>: they pop as many operands as needed from the stack and return a result.
+
+By keeping the operations in a list they can easily be extended.
 
 ## Tests
+
+![](images/rpn_calc_test_push.jpeg)
+
+![](images/rpn_calc_test_drop.jpeg)
+
+![](images/rpn_calc_test_calc.jpeg)
+
