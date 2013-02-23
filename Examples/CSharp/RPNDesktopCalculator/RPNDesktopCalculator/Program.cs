@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RPNDesktopCalculator.tests;
 
 namespace RPNDesktopCalculator
 {
@@ -16,7 +17,14 @@ namespace RPNDesktopCalculator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UI());
+
+            var ui = new UI();
+            var rpn = new RPNCalculator();
+
+            ui.Number_entered += rpn.Push;
+            rpn.Result += ui.Display_result;
+
+            Application.Run(ui);
         }
     }
 }
