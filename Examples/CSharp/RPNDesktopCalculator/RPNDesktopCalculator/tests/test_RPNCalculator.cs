@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -113,70 +112,26 @@ namespace RPNDesktopCalculator.tests
             Assert.AreEqual(new int[] {}, result.Item1);
             Assert.AreEqual(6, result.Item2);
         }
-    }
 
 
-    public class RPNCalculator
-    {
-        private readonly Stack<int> _stack;
-        private readonly Dictionary<string, Func<Stack<int>, int>> _operations; 
-
-        public RPNCalculator() : this(new Stack<int>()) {}
-        public RPNCalculator(Stack<int> stack)
+        [TestCase(12, "-", 5, 7)]
+        [TestCase(12, "*", 2, 24)]
+        [TestCase(12, "/", 3, 4)]
+        public void More_basic_operations(int leftOperand, 
+                                            string op, 
+                                            int number, 
+                                            int calcResult)
         {
-            _stack = stack;
+            var initialStack = new Stack<int>();
+            initialStack.Push(leftOperand);
+            var sut = new RPNCalculator(initialStack);
 
-            _operations = new Dictionary<string, Func<Stack<int>, int>>
-            {
-                {
-                    "+", 
-                    operands =>
-                    {
-                        var right = operands.Pop();
-                        var left = operands.Pop();
-                        return left + right;
-                    }},
-                {
-                    "!",
-                    operands =>
-                    {
-                        var operand = operands.Pop();
-                        return Factorial(operand);
-                    }
-                }
-            };
-        }
+            Tuple<IEnumerable<int>, int> result = null;
+            sut.Result += _ => result = _;
+            sut.Calculate(new Tuple<string, int>(op, number));
 
-
-        public void Push(int number)
-        {
-            _stack.Push(number);
-            Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), number));
-        }
-
-
-        public void Calculate(Tuple<string, int> calcRequest)
-        {
-            _stack.Push(calcRequest.Item2);
-            var operation = _operations[calcRequest.Item1];
-            var result = operation(_stack);
-            Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), result));
-        }
-
-        public void Drop()
-        {
-            var number = _stack.Any() ? _stack.Pop() : 0;
-            Result(new Tuple<IEnumerable<int>, int>(_stack.Reverse(), number));
-        }
-
-
-        public event Action<Tuple<IEnumerable<int>, int>> Result;
-
-
-        int Factorial(int n)
-        {
-            if (n <= 1) return 1;
-            return Factorial(n - 1)*n;
+            Assert.AreEqual(new int[] { }, result.Item1);
+            Assert.AreEqual(calcResult, result.Item2);   
         }
     }
 }
