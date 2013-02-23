@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="tests\test_RPNCalculator.cs" />
     <Compile Include="tests\test_UI.cs" />
     <Compile Include="UI.cs">
       <SubType>Form</SubType>

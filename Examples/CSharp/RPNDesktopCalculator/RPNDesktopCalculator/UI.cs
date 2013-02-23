@@ -44,10 +44,10 @@ namespace RPNDesktopCalculator
         public event Action<int> Number_entered;
 
 
-        public void Display_result(Tuple<List<int>, int> result)
+        public void Display_result(Tuple<IEnumerable<int>, int> result)
         {
             lstStack.Items.Clear();
-            result.Item1.ForEach(n => lstStack.Items.Add(n.ToString()));
+            result.Item1.ToList().ForEach(n => lstStack.Items.Add(n.ToString()));
             txtCurrentNumber.Text = result.Item2.ToString();
 
             txtCurrentNumber.Focus();

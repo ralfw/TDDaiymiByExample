@@ -19,7 +19,7 @@ namespace RPNDesktopCalculator.tests
             ui.Number_entered += n =>
                 {
                     list.Add(n);
-                    ui.Display_result(new Tuple<List<int>, int>(list, n*10));
+                    ui.Display_result(new Tuple<IEnumerable<int>, int>(list, n*10));
                 };
 
             ui.ShowDialog();
