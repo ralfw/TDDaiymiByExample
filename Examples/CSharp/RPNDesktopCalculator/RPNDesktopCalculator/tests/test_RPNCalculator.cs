@@ -9,7 +9,7 @@ namespace RPNDesktopCalculator.tests
     [TestFixture]
     public class test_RPNCalculator
     {
-        [Test]
+        [Test, Category("Push")]
         public void Push_on_empty_stack()
         {
             var sut = new RPNCalculator();
@@ -22,7 +22,7 @@ namespace RPNDesktopCalculator.tests
             Assert.AreEqual(1, result.Item2);
         }
 
-        [Test]
+        [Test, Category("Push")]
         public void Push_number_on_non_empty_stack()
         {
             var initialStack = new Stack<int>();
@@ -38,7 +38,7 @@ namespace RPNDesktopCalculator.tests
         }
 
 
-        [Test]
+        [Test, Category("Calc")]
         public void Add_number_to_single_value_stack()
         {
             var initialStack = new Stack<int>();
@@ -53,7 +53,7 @@ namespace RPNDesktopCalculator.tests
             Assert.AreEqual(5, result.Item2);
         }
 
-        [Test]
+        [Test, Category("Calc")]
         public void Add_number_to_stack_top()
         {
             var initialStack = new Stack<int>();
@@ -70,7 +70,7 @@ namespace RPNDesktopCalculator.tests
         }
 
 
-        [Test]
+        [Test, Category("Drop")]
         public void Drop_number_from_empty_stack()
         {
             var initialStack = new Stack<int>();
@@ -84,7 +84,7 @@ namespace RPNDesktopCalculator.tests
             Assert.AreEqual(0, result.Item2);
         }
 
-        [Test]
+        [Test, Category("Drop")]
         public void Drop_number_from_non_empty_stack()
         {
             var initialStack = new Stack<int>();
@@ -100,7 +100,7 @@ namespace RPNDesktopCalculator.tests
         }
 
 
-        [Test]
+        [Test, Category("Calc")]
         public void Calculate_factorial_for_current_number()
         {
             var sut = new RPNCalculator();
@@ -114,9 +114,9 @@ namespace RPNDesktopCalculator.tests
         }
 
 
-        [TestCase(12, "-", 5, 7)]
-        [TestCase(12, "*", 2, 24)]
-        [TestCase(12, "/", 3, 4)]
+        [TestCase(12, "-", 5, 7), Category("Calc")]
+        [TestCase(12, "*", 2, 24), Category("Calc")]
+        [TestCase(12, "/", 3, 4), Category("Calc")]
         public void More_basic_operations(int leftOperand, 
                                             string op, 
                                             int number, 

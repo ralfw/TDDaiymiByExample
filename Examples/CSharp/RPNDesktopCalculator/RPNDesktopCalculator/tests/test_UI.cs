@@ -11,7 +11,7 @@ namespace RPNDesktopCalculator.tests
     [TestFixture]
     public class test_UI
     {
-        [Test, Explicit]
+        [Test, Explicit, Category("Manual")]
         public void Enter_number_and_display_stack()
         {
             var ui = new UI();
@@ -26,7 +26,7 @@ namespace RPNDesktopCalculator.tests
             ui.ShowDialog();
         }
 
-        [Test, Explicit]
+        [Test, Explicit, Category("Manual")]
         public void Press_operator()
         {
             var ui = new UI();
@@ -40,7 +40,7 @@ namespace RPNDesktopCalculator.tests
             ui.ShowDialog();
         }
 
-        [Test, Explicit]
+        [Test, Explicit, Category("Manual")]
         public void Drop_number()
         {
             var ui = new UI();
